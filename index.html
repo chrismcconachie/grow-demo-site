@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grow Demo Sites</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #1a1a1a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      color: #555;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+
+    .card-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 80px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 20px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #2563eb;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: gap 0.2s ease;
+    }
+
+    .card:hover .card-link {
+      gap: 8px;
+    }
+
+    .card-link::after {
+      content: '\2192';
+    }
+
+    .section-divider {
+      margin-top: 0;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2563eb;
+      background: #eff6ff;
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 960px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card-grid.two-col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card-grid,
+      .card-grid.two-col {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        padding: 40px 16px 60px;
+      }
+      .section-header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Template Options Section -->
+    <div class="section-header">
+      <h1>Template Options</h1>
+      <p>Choose a design style for your website</p>
+    </div>
+
+    <div class="card-grid two-col">
+      <!-- Bold Template -->
+      <a class="card" href="http://pushpress-site-bold-demo.webflow.io/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/bold.png"
+          alt="Bold Template"
+        />
+        <div class="card-body">
+          <div class="card-title">Bold</div>
+          <div class="card-desc">High-impact design with bold typography and dark overlays. Built to command attention and energize your brand.</div>
+          <span class="card-link">Preview Template</span>
+        </div>
+      </a>
+
+      <!-- Modern Template -->
+      <a class="card" href="http://pushpress-site-modern.webflow.io/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/modern.png"
+          alt="Modern Template"
+        />
+        <div class="card-body">
+          <div class="card-title">Modern</div>
+          <div class="card-desc">Clean, refined layout with elegant typography and a polished feel. A sophisticated look that puts your content first.</div>
+          <span class="card-link">Preview Template</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Demo Sites Section -->
+    <div class="section-header">
+      <h1>Onboarding Method</h1>
+      <p>Tailor your site's onboarding experience to match your CTA</p>
+    </div>
+
+    <div class="card-grid">
+      <!-- Card 1 -->
+      <a class="card" href="https://example.com/demo1" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/demo-screenshot.png"
+          alt="Free Intro Session — Self-Book"
+        />
+        <div class="card-body">
+          <div class="card-title">Free Intro Session — Self-Book</div>
+          <div class="card-desc">For businesses with set staff availability. Leads pick a time that works and book instantly.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="card" href="https://example.com/demo2" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/demo-screenshot.png"
+          alt="Free Intro Session — High Touch"
+        />
+        <div class="card-body">
+          <div class="card-title">Free Intro Session — High Touch</div>
+          <div class="card-desc">For businesses that prefer a personal approach. Staff connects directly to find the right starting point.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="card" href="https://example.com/demo3" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/demo-screenshot.png"
+          alt="Free Trial Class — Self-Book"
+        />
+        <div class="card-body">
+          <div class="card-title">Free Trial Class — Self-Book</div>
+          <div class="card-desc">Let leads browse your class schedule and drop into a session to experience your facility firsthand.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Row 2 of demos (2 cards centered) -->
+    <div class="card-grid two-col">
+      <!-- Card 4 -->
+      <a class="card" href="https://example.com/demo4" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/demo-screenshot.png"
+          alt="Free Trial Class — High Touch"
+        />
+        <div class="card-body">
+          <div class="card-title">Free Trial Class — High Touch</div>
+          <div class="card-desc">For businesses that need to protect class sizes. Leads book a real spot so your schedule stays accurate.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+
+      <!-- Card 5 -->
+      <a class="card" href="https://example.com/demo5" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/demo-screenshot.png"
+          alt="Paid Trial — Discounted Access"
+        />
+        <div class="card-body">
+          <div class="card-title">Paid Trial — Discounted Access</div>
+          <div class="card-desc">A low-commitment offer like $7 for 7 days. Leads book and pay upfront — only serious prospects walk in.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Pre-Open Launch Kit Section -->
+    <div class="section-header section-divider">
+      <h1>Pre-Open Launch Kit</h1>
+      <p>Help gyms open with members and revenue from day one</p>
+    </div>
+
+    <div class="card-grid two-col">
+      <!-- Interest List -->
+      <a class="card" href="https://1page-template.webflow.io/interest-list" target="_blank" rel="noopener">
+        <img class="card-image" src="images/demo-screenshot.png" alt="Interest List" />
+        <div class="card-body">
+          <div class="card-title">Interest List</div>
+          <div class="card-desc">A simple "opening soon" page to start capturing demand before your gym opens. Collects names and emails — no pricing, no selling.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+
+      <!-- Founder Pre-Sell -->
+      <a class="card" href="https://1page-template.webflow.io/founder-membership" target="_blank" rel="noopener">
+        <img class="card-image" src="images/demo-screenshot.png" alt="Founder Pre-Sell" />
+        <div class="card-body">
+          <div class="card-title">Founder Pre-Sell</div>
+          <div class="card-desc">A conversion-focused page that turns early interest into paid founding memberships before opening day. Built around urgency and a clear founder offer.</div>
+          <span class="card-link">View Demo</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Client Sites Section -->
+    <div class="section-header section-divider">
+      <h1>Client Sites</h1>
+      <p>Explore our client success stories</p>
+    </div>
+
+    <div class="card-grid">
+      <!-- Client 1 -->
+      <a class="card" href="https://www.eastyardcrossfit.com/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/east-yard-crossfit.png"
+          alt="East Yard CrossFit"
+        />
+        <div class="card-body">
+          <div class="card-title">East Yard CrossFit</div>
+          <div class="card-desc">Premier CrossFit box in Brooklyn, NY specializing in functional fitness and community-driven training.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Client 2 -->
+      <a class="card" href="https://rsc-athletics.webflow.io/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/rsc-athletics.png"
+          alt="RSC Athletics"
+        />
+        <div class="card-body">
+          <div class="card-title">RSC Athletics</div>
+          <div class="card-desc">High-performance athletic training center in Texas focused on strength and conditioning for all levels.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Client 3 -->
+      <a class="card" href="https://www.omegaata.com/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/omega-ata.png"
+          alt="Omega ATA"
+        />
+        <div class="card-body">
+          <div class="card-title">Omega ATA</div>
+          <div class="card-desc">Traditional Taekwondo martial arts academy in California offering classes for kids and adults.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Row 2 of clients (2 cards centered) -->
+    <div class="card-grid two-col">
+      <!-- Client 4 -->
+      <a class="card" href="https://www.tonka-fitness.com/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/tonka-fitness.png"
+          alt="Tonka Fitness"
+        />
+        <div class="card-body">
+          <div class="card-title">Tonka Fitness</div>
+          <div class="card-desc">Modern fitness center in Minnesota delivering personalized training and group fitness classes.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Client 5 -->
+      <a class="card" href="https://www.ksathleticclub.com/" target="_blank" rel="noopener">
+        <img
+          class="card-image"
+          src="images/ks-athletic-club.png"
+          alt="KS Athletic Club"
+        />
+        <div class="card-body">
+          <div class="card-title">KS Athletic Club</div>
+          <div class="card-desc">CrossFit gym in Overland Park, Kansas offering group fitness, bootcamp, personal training, and youth programs.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Multi-Location Sites Section -->
+    <div class="section-header section-divider">
+      <h1>Multi-Location Sites</h1>
+      <p>Websites built for businesses operating across multiple locations</p>
+    </div>
+
+    <div class="card-grid">
+      <!-- Multi 1 -->
+      <a class="card" href="https://crossfit-super7.webflow.io/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/super7.png" alt="CrossFit Super7" />
+        <div class="card-body">
+          <span class="card-badge">2 Locations</span>
+          <div class="card-title">CrossFit Super7</div>
+          <div class="card-desc">CrossFit affiliate with two locations, each featuring dedicated schedules, programs, and contact information.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Multi 2 -->
+      <a class="card" href="https://crossfit-threefold-ee1387.webflow.io/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/threefold.png" alt="CrossFit Threefold" />
+        <div class="card-body">
+          <span class="card-badge">2 Locations</span>
+          <div class="card-title">CrossFit Threefold</div>
+          <div class="card-desc">Multi-location CrossFit gym with location-specific pages for schedules, pricing, and class offerings.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Multi 3 -->
+      <a class="card" href="https://www.strongsidefitness.com/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/strongside.png" alt="Strongside Fitness" />
+        <div class="card-body">
+          <span class="card-badge">3 Locations</span>
+          <div class="card-title">Strongside Fitness</div>
+          <div class="card-desc">Growing fitness brand with three locations, each with its own programs, staff, and community.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Row 2 of multi-location (3 cards) -->
+    <div class="card-grid">
+      <!-- Multi 4 -->
+      <a class="card" href="https://crossfit-646.webflow.io/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/cf646.png" alt="CrossFit 646" />
+        <div class="card-body">
+          <span class="card-badge">2 Locations</span>
+          <div class="card-title">CrossFit 646</div>
+          <div class="card-desc">CrossFit gym serving two communities with tailored class schedules and location-specific onboarding.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Multi 5 -->
+      <a class="card" href="https://team-papakolea-jiu-jitsu.webflow.io/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/Papakolea.png" alt="Team Papakolea Jiu-Jitsu" />
+        <div class="card-body">
+          <span class="card-badge">2 Locations</span>
+          <div class="card-title">Team Papakolea Jiu-Jitsu</div>
+          <div class="card-desc">Hawaiian jiu-jitsu academy with two training locations, unified branding, and per-location schedules.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+
+      <!-- Multi 6 -->
+      <a class="card" href="https://www.tailormadecoaching.ie/" target="_blank" rel="noopener">
+        <img class="card-image" src="images/Tailormade.png" alt="Tailormade Coaching" />
+        <div class="card-body">
+          <span class="card-badge">7 Locations</span>
+          <div class="card-title">Tailormade Coaching</div>
+          <div class="card-desc">Ireland's largest multi-location fitness brand with seven gyms, each with dedicated pages and local programming.</div>
+          <span class="card-link">Visit Site</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

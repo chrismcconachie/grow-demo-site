@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Layout Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #e5e7eb;
+      color: #1a1a1a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Controls Panel ── */
+    .controls {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 100vh;
+      background: #fff;
+      border-right: 1px solid #d1d5db;
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 100;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+    }
+
+    .controls h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #111;
+    }
+
+    .controls .subtitle {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .control-group {
+      margin-bottom: 16px;
+    }
+
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .control-group label .val {
+      font-weight: 400;
+      font-size: 12px;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 2px 8px;
+      border-radius: 10px;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .control-group input[type="range"] {
+      width: 100%;
+      accent-color: #2563eb;
+    }
+
+    .control-group select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      background: #fff;
+    }
+
+    /* Color theme swatches */
+    .theme-swatches {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .theme-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.15s;
+      position: relative;
+    }
+    .theme-swatch:hover { transform: scale(1.1); }
+    .theme-swatch.active { border-color: #111; }
+    .theme-swatch::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 4px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 18px 0;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+
+    .btn-secondary { background: #f3f4f6; color: #333; border: 1px solid #d1d5db; }
+    .btn-secondary:hover { background: #e5e7eb; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #111;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Preview Area ── */
+    .preview-area {
+      margin-left: 320px;
+      min-height: 100vh;
+      transition: background-color 0.3s;
+    }
+
+    .page {
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 6px; transition: color 0.3s; }
+    .section-header p { font-size: 16px; transition: color 0.3s; }
+
+    .card-grid { display: grid; margin-bottom: 80px; }
+    .card-grid.two-col { margin-left: auto; margin-right: auto; }
+
+    .card {
+      overflow: hidden;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { transform: translateY(-2px); }
+
+    .card-image {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title { font-weight: 600; margin-bottom: 8px; transition: color 0.3s; }
+    .card-desc { line-height: 1.55; flex: 1; transition: color 0.3s; }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: color 0.3s;
+    }
+    .card-link::after { content: '\2192'; }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 8px;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .fake-screenshot {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls -->
+  <div class="controls">
+    <h2>Card Layout</h2>
+    <p class="subtitle">Adjust values and see live changes</p>
+
+    <!-- LAYOUT -->
+    <div class="section-label">Layout</div>
+
+    <div class="control-group">
+      <label>Grid Gap <span class="val" id="v-gap">28px</span></label>
+      <input type="range" id="c-gap" min="8" max="60" value="28">
+    </div>
+
+    <div class="control-group">
+      <label>Section Spacing <span class="val" id="v-spacing">80px</span></label>
+      <input type="range" id="c-spacing" min="20" max="120" value="80">
+    </div>
+
+    <div class="control-group">
+      <label>Image Aspect Ratio <span class="val" id="v-ratio">16 / 10</span></label>
+      <select id="c-ratio">
+        <option value="16 / 9">16 : 9</option>
+        <option value="16 / 10" selected>16 : 10 (current)</option>
+        <option value="3 / 2">3 : 2</option>
+        <option value="4 / 3">4 : 3</option>
+        <option value="1 / 1">1 : 1 (square)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>Card Border Radius <span class="val" id="v-radius">12px</span></label>
+      <input type="range" id="c-radius" min="0" max="24" value="12">
+    </div>
+
+    <div class="control-group">
+      <label>Card Body Padding <span class="val" id="v-padding">22px</span></label>
+      <input type="range" id="c-padding" min="8" max="40" value="22">
+    </div>
+
+    <div class="control-group">
+      <label>Page Max Width <span class="val" id="v-maxw">1320px</span></label>
+      <input type="range" id="c-maxw" min="800" max="1600" step="20" value="1320">
+    </div>
+
+    <div class="control-group">
+      <label>2-Col Max Width <span class="val" id="v-twocol">900px</span></label>
+      <input type="range" id="c-twocol" min="600" max="1200" step="20" value="900">
+    </div>
+
+    <div class="control-group">
+      <label>Columns (3-col grids) <span class="val" id="v-cols">3</span></label>
+      <select id="c-cols">
+        <option value="2">2 columns</option>
+        <option value="3" selected>3 columns (current)</option>
+        <option value="4">4 columns</option>
+      </select>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TYPOGRAPHY -->
+    <div class="section-label">Typography</div>
+
+    <div class="control-group">
+      <label>Font Family <span class="val" id="v-font">System Default</span></label>
+      <select id="c-font">
+        <option value="system" selected>System Default (current)</option>
+        <option value="inter">Inter</option>
+        <option value="dm-sans">DM Sans</option>
+        <option value="outfit">Outfit</option>
+        <option value="jakarta">Plus Jakarta Sans</option>
+        <option value="manrope">Manrope</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>Title Font Size <span class="val" id="v-titlesize">18px</span></label>
+      <input type="range" id="c-titlesize" min="14" max="28" value="18">
+    </div>
+
+    <div class="control-group">
+      <label>Body Font Size <span class="val" id="v-bodysize">15px</span></label>
+      <input type="range" id="c-bodysize" min="12" max="20" value="15">
+    </div>
+
+    <div class="control-group">
+      <label>Section Title Size <span class="val" id="v-sectionsize">32px</span></label>
+      <input type="range" id="c-sectionsize" min="22" max="48" value="32">
+    </div>
+
+    <hr class="divider">
+
+    <!-- STYLE -->
+    <div class="section-label">Style</div>
+
+    <div class="control-group">
+      <label>Shadow Depth <span class="val" id="v-shadow">Light</span></label>
+      <select id="c-shadow">
+        <option value="none">None</option>
+        <option value="light" selected>Light (current)</option>
+        <option value="medium">Medium</option>
+        <option value="heavy">Heavy</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>Color Theme <span class="val" id="v-theme">Light Gray</span></label>
+      <div class="theme-swatches" id="theme-swatches">
+        <div class="theme-swatch active" data-theme="light-gray" title="Light Gray" style="background: linear-gradient(135deg, #f3f4f6, #fff)"></div>
+        <div class="theme-swatch" data-theme="white" title="White" style="background: linear-gradient(135deg, #fff, #fafafa)"></div>
+        <div class="theme-swatch" data-theme="warm" title="Warm Sand" style="background: linear-gradient(135deg, #faf5f0, #fff)"></div>
+        <div class="theme-swatch" data-theme="cool" title="Cool Slate" style="background: linear-gradient(135deg, #f0f4f8, #fff)"></div>
+        <div class="theme-swatch" data-theme="dark" title="Dark" style="background: linear-gradient(135deg, #111827, #1f2937)"></div>
+        <div class="theme-swatch" data-theme="midnight" title="Midnight Blue" style="background: linear-gradient(135deg, #0f172a, #1e293b)"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btn-copy">Copy CSS</button>
+      <button class="btn btn-secondary" id="btn-reset">Reset</button>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-area" id="preview-area">
+    <div class="page" id="page">
+      <!-- 3-col section -->
+      <div class="section-header">
+        <h1>Onboarding Method</h1>
+        <p>Tailor your site's onboarding experience to match your CTA</p>
+      </div>
+
+      <div class="card-grid three-col" id="grid-3col">
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <div class="card-title">Free Intro Session — Self-Book</div>
+            <div class="card-desc">For businesses with set staff availability. Leads pick a time that works and book instantly.</div>
+            <span class="card-link">View Demo</span>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <div class="card-title">Free Intro Session — High Touch</div>
+            <div class="card-desc">For businesses that prefer a personal approach. Staff connects directly to find the right starting point.</div>
+            <span class="card-link">View Demo</span>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <div class="card-title">Free Trial Class — Self-Book</div>
+            <div class="card-desc">Let leads browse your class schedule and drop into a session to experience your facility firsthand.</div>
+            <span class="card-link">View Demo</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 2-col section -->
+      <div class="section-header">
+        <h1>Pre-Open Launch Kit</h1>
+        <p>Help gyms open with members and revenue from day one</p>
+      </div>
+
+      <div class="card-grid two-col" id="grid-2col">
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <div class="card-title">Interest List</div>
+            <div class="card-desc">A simple "opening soon" page to start capturing demand before your gym opens. Collects names and emails — no pricing, no selling.</div>
+            <span class="card-link">View Demo</span>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <div class="card-title">Founder Pre-Sell</div>
+            <div class="card-desc">A conversion-focused page that turns early interest into paid founding memberships before opening day. Built around urgency and a clear founder offer.</div>
+            <span class="card-link">View Demo</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Multi-location sample with badges -->
+      <div class="section-header">
+        <h1>Multi-Location Sites</h1>
+        <p>Websites built for businesses operating across multiple locations</p>
+      </div>
+
+      <div class="card-grid three-col" id="grid-multi">
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <span class="card-badge">2 Locations</span>
+            <div class="card-title">CrossFit Super7</div>
+            <div class="card-desc">CrossFit affiliate with two locations, each featuring dedicated schedules, programs, and contact information.</div>
+            <span class="card-link">Visit Site</span>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <span class="card-badge">3 Locations</span>
+            <div class="card-title">Strongside Fitness</div>
+            <div class="card-desc">Growing fitness brand with three locations, each with its own programs, staff, and community.</div>
+            <span class="card-link">Visit Site</span>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-image"><div class="fake-screenshot">screenshot</div></div>
+          <div class="card-body">
+            <span class="card-badge">7 Locations</span>
+            <div class="card-title">Tailormade Coaching</div>
+            <div class="card-desc">Ireland's largest multi-location fitness brand with seven gyms, each with dedicated pages and local programming.</div>
+            <span class="card-link">Visit Site</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard!</div>
+
+  <script>
+    // ── Font map ──
+    const fontMap = {
+      'system': "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      'inter': "'Inter', sans-serif",
+      'dm-sans': "'DM Sans', sans-serif",
+      'outfit': "'Outfit', sans-serif",
+      'jakarta': "'Plus Jakarta Sans', sans-serif",
+      'manrope': "'Manrope', sans-serif",
+    };
+    const fontLabels = {
+      'system': 'System Default', 'inter': 'Inter', 'dm-sans': 'DM Sans',
+      'outfit': 'Outfit', 'jakarta': 'Plus Jakarta Sans', 'manrope': 'Manrope'
+    };
+
+    // ── Shadow map ──
+    const shadowMap = {
+      'none':   { rest: 'none', hover: 'none' },
+      'light':  { rest: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)', hover: '0 8px 24px rgba(0,0,0,0.1)' },
+      'medium': { rest: '0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06)', hover: '0 12px 32px rgba(0,0,0,0.14)' },
+      'heavy':  { rest: '0 4px 16px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)', hover: '0 20px 48px rgba(0,0,0,0.18)' },
+    };
+
+    // ── Theme map ──
+    const themes = {
+      'light-gray': {
+        label: 'Light Gray', bg: '#f3f4f6', cardBg: '#fff',
+        heading: '#111', body: '#555', link: '#2563eb',
+        badgeBg: '#eff6ff', badgeColor: '#2563eb'
+      },
+      'white': {
+        label: 'White', bg: '#ffffff', cardBg: '#fff',
+        heading: '#111', body: '#555', link: '#2563eb',
+        badgeBg: '#eff6ff', badgeColor: '#2563eb'
+      },
+      'warm': {
+        label: 'Warm Sand', bg: '#faf5f0', cardBg: '#fff',
+        heading: '#292118', body: '#6b5c4d', link: '#b45309',
+        badgeBg: '#fef3c7', badgeColor: '#92400e'
+      },
+      'cool': {
+        label: 'Cool Slate', bg: '#f0f4f8', cardBg: '#fff',
+        heading: '#0f172a', body: '#475569', link: '#0369a1',
+        badgeBg: '#e0f2fe', badgeColor: '#0369a1'
+      },
+      'dark': {
+        label: 'Dark', bg: '#111827', cardBg: '#1f2937',
+        heading: '#f9fafb', body: '#9ca3af', link: '#60a5fa',
+        badgeBg: '#1e3a5f', badgeColor: '#93c5fd'
+      },
+      'midnight': {
+        label: 'Midnight Blue', bg: '#0f172a', cardBg: '#1e293b',
+        heading: '#e2e8f0', body: '#94a3b8', link: '#38bdf8',
+        badgeBg: '#0c4a6e', badgeColor: '#7dd3fc'
+      },
+    };
+
+    // ── Defaults ──
+    const defaults = {
+      gap: 28, spacing: 80, ratio: '16 / 10', radius: 12, padding: 22,
+      maxw: 1320, twocol: 900, cols: '3',
+      font: 'system', titlesize: 18, bodysize: 15, sectionsize: 32,
+      shadow: 'light', theme: 'light-gray'
+    };
+
+    // ── DOM refs ──
+    const els = {
+      gap: document.getElementById('c-gap'),
+      spacing: document.getElementById('c-spacing'),
+      ratio: document.getElementById('c-ratio'),
+      radius: document.getElementById('c-radius'),
+      padding: document.getElementById('c-padding'),
+      maxw: document.getElementById('c-maxw'),
+      twocol: document.getElementById('c-twocol'),
+      cols: document.getElementById('c-cols'),
+      font: document.getElementById('c-font'),
+      titlesize: document.getElementById('c-titlesize'),
+      bodysize: document.getElementById('c-bodysize'),
+      sectionsize: document.getElementById('c-sectionsize'),
+      shadow: document.getElementById('c-shadow'),
+    };
+
+    const vals = {
+      gap: document.getElementById('v-gap'),
+      spacing: document.getElementById('v-spacing'),
+      ratio: document.getElementById('v-ratio'),
+      radius: document.getElementById('v-radius'),
+      padding: document.getElementById('v-padding'),
+      maxw: document.getElementById('v-maxw'),
+      twocol: document.getElementById('v-twocol'),
+      cols: document.getElementById('v-cols'),
+      font: document.getElementById('v-font'),
+      titlesize: document.getElementById('v-titlesize'),
+      bodysize: document.getElementById('v-bodysize'),
+      sectionsize: document.getElementById('v-sectionsize'),
+      shadow: document.getElementById('v-shadow'),
+      theme: document.getElementById('v-theme'),
+    };
+
+    let currentTheme = 'light-gray';
+
+    function apply() {
+      const gap = els.gap.value + 'px';
+      const spacing = els.spacing.value + 'px';
+      const ratio = els.ratio.value;
+      const radius = els.radius.value + 'px';
+      const pad = parseInt(els.padding.value);
+      const maxw = els.maxw.value + 'px';
+      const twocol = els.twocol.value + 'px';
+      const cols = els.cols.value;
+      const fontKey = els.font.value;
+      const titleSize = els.titlesize.value + 'px';
+      const bodySize = els.bodysize.value + 'px';
+      const sectionSize = els.sectionsize.value + 'px';
+      const shadowKey = els.shadow.value;
+      const theme = themes[currentTheme];
+      const shadow = shadowMap[shadowKey];
+
+      // Update value labels
+      vals.gap.textContent = gap;
+      vals.spacing.textContent = spacing;
+      vals.ratio.textContent = ratio;
+      vals.radius.textContent = radius;
+      vals.padding.textContent = pad + 'px';
+      vals.maxw.textContent = maxw;
+      vals.twocol.textContent = twocol;
+      vals.cols.textContent = cols;
+      vals.font.textContent = fontLabels[fontKey];
+      vals.titlesize.textContent = titleSize;
+      vals.bodysize.textContent = bodySize;
+      vals.sectionsize.textContent = sectionSize;
+      vals.shadow.textContent = shadowKey.charAt(0).toUpperCase() + shadowKey.slice(1);
+      vals.theme.textContent = theme.label;
+
+      // Page layout
+      document.getElementById('page').style.maxWidth = maxw;
+
+      // Background
+      document.getElementById('preview-area').style.backgroundColor = theme.bg;
+
+      // Font
+      const fontStack = fontMap[fontKey];
+      document.getElementById('preview-area').style.fontFamily = fontStack;
+
+      // Grids
+      document.querySelectorAll('.card-grid').forEach(g => {
+        g.style.gap = gap;
+        g.style.marginBottom = spacing;
+      });
+      document.querySelectorAll('.card-grid.three-col').forEach(g => {
+        g.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      });
+      document.querySelectorAll('.card-grid.two-col').forEach(g => {
+        g.style.maxWidth = twocol;
+      });
+
+      // Cards
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.borderRadius = radius;
+        c.style.backgroundColor = theme.cardBg;
+        c.style.boxShadow = shadow.rest;
+        c.onmouseenter = () => { c.style.boxShadow = shadow.hover; };
+        c.onmouseleave = () => { c.style.boxShadow = shadow.rest; };
+      });
+
+      // Card images
+      document.querySelectorAll('.card-image').forEach(img => {
+        img.style.aspectRatio = ratio;
+      });
+
+      // Card bodies
+      document.querySelectorAll('.card-body').forEach(b => {
+        b.style.padding = `${pad}px ${pad}px ${pad + 2}px`;
+      });
+
+      // Typography
+      document.querySelectorAll('.card-title').forEach(t => {
+        t.style.fontSize = titleSize;
+        t.style.color = theme.heading;
+      });
+      document.querySelectorAll('.card-desc').forEach(d => {
+        d.style.fontSize = bodySize;
+        d.style.color = theme.body;
+      });
+      document.querySelectorAll('.card-link').forEach(l => {
+        l.style.fontSize = bodySize;
+        l.style.color = theme.link;
+      });
+      document.querySelectorAll('.section-header h1').forEach(h => {
+        h.style.fontSize = sectionSize;
+        h.style.color = theme.heading;
+      });
+      document.querySelectorAll('.section-header p').forEach(p => {
+        p.style.color = theme.body;
+      });
+      document.querySelectorAll('.card-badge').forEach(b => {
+        b.style.backgroundColor = theme.badgeBg;
+        b.style.color = theme.badgeColor;
+      });
+    }
+
+    // Bind range/select controls
+    Object.values(els).forEach(el => {
+      el.addEventListener('input', apply);
+    });
+
+    // Bind theme swatches
+    document.querySelectorAll('.theme-swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        document.querySelectorAll('.theme-swatch').forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
+        currentTheme = swatch.dataset.theme;
+        apply();
+      });
+    });
+
+    // Copy CSS
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      const theme = themes[currentTheme];
+      const shadow = shadowMap[els.shadow.value];
+      const fontKey = els.font.value;
+      const fontStack = fontMap[fontKey];
+
+      const css = `/* ── Layout ── */
+.page {
+  max-width: ${els.maxw.value}px;
+}
+
+.card-grid {
+  grid-template-columns: repeat(${els.cols.value}, 1fr);
+  gap: ${els.gap.value}px;
+  margin-bottom: ${els.spacing.value}px;
+}
+
+.card-grid.two-col {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: ${els.twocol.value}px;
+}
+
+.card {
+  border-radius: ${els.radius.value}px;
+  background: ${theme.cardBg};
+  box-shadow: ${shadow.rest};
+}
+
+.card:hover {
+  box-shadow: ${shadow.hover};
+}
+
+.card-image {
+  aspect-ratio: ${els.ratio.value};
+}
+
+.card-body {
+  padding: ${els.padding.value}px ${els.padding.value}px ${parseInt(els.padding.value) + 2}px;
+}
+
+/* ── Typography ── */
+body {
+  font-family: ${fontStack};
+  background-color: ${theme.bg};
+}
+
+.section-header h1 {
+  font-size: ${els.sectionsize.value}px;
+  color: ${theme.heading};
+}
+
+.section-header p {
+  color: ${theme.body};
+}
+
+.card-title {
+  font-size: ${els.titlesize.value}px;
+  color: ${theme.heading};
+}
+
+.card-desc {
+  font-size: ${els.bodysize.value}px;
+  color: ${theme.body};
+}
+
+.card-link {
+  font-size: ${els.bodysize.value}px;
+  color: ${theme.link};
+}
+
+.card-badge {
+  color: ${theme.badgeColor};
+  background: ${theme.badgeBg};
+}`;
+
+      navigator.clipboard.writeText(css).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    });
+
+    // Reset
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      els.gap.value = defaults.gap;
+      els.spacing.value = defaults.spacing;
+      els.ratio.value = defaults.ratio;
+      els.radius.value = defaults.radius;
+      els.padding.value = defaults.padding;
+      els.maxw.value = defaults.maxw;
+      els.twocol.value = defaults.twocol;
+      els.cols.value = defaults.cols;
+      els.font.value = defaults.font;
+      els.titlesize.value = defaults.titlesize;
+      els.bodysize.value = defaults.bodysize;
+      els.sectionsize.value = defaults.sectionsize;
+      els.shadow.value = defaults.shadow;
+      currentTheme = defaults.theme;
+      document.querySelectorAll('.theme-swatch').forEach(s => s.classList.remove('active'));
+      document.querySelector('[data-theme="light-gray"]').classList.add('active');
+      apply();
+    });
+
+    // Initial render
+    apply();
+  </script>
+</body>
+</html>

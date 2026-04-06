@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "demo-site",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/cmcconachie/claude-code/grow-demo-site && python3 -m http.server 8080"],
+      "port": 8080
+    }
+  ]
+}
