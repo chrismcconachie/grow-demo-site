@@ -520,7 +520,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Internal &middot; Sales + Onboarding</div>
       <h1 class="hero-title">Find the right demo for every <span class="highlight">type</span> of gym we onboard.</h1>
-      <p class="hero-subtitle">Pick a template, onboarding path, or pre-open kit &mdash; then send the link to your prospect.</p>
+      <p class="hero-subtitle">Browse templates, onboarding paths, pre-open kits, and live client builds to see what your site could look like.</p>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><strong>2</strong> templates</div>
@@ -860,6 +860,12 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'Select Date/Time (GHL Calendar)', 'Confirmation', 'First Visit'],
         ctas: ['Book Your Free Intro', 'Schedule a Free Session', 'Claim Your Free 1-on-1'],
+        nurtures: [
+          ['Nurture to Session', 'Automated SMS + email sequence from booking to intro session — reminders, what to expect, and directions to the gym.'],
+          ['Abandonment Nurture', 'If a lead fills out the form but doesn\'t book, an automated sequence follows up to get them back on the calendar.'],
+          ['No-Show Nurture', 'If a lead books but doesn\'t show up, a re-engagement sequence fires to reschedule.'],
+          ['Post-Session Followup', 'After the intro, automated followup encourages membership signup — recap, next steps, and a clear offer.'],
+        ],
       },
       path2: {
         title: 'Free Intro Session — Self Book (Phone Call)',
@@ -872,6 +878,12 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'Select Date/Time (GHL Calendar)', 'Confirmation', 'Phone Call', 'First Visit'],
         ctas: ['Book Your Free Intro Call', 'Schedule a Free Consultation', 'Talk to a Coach'],
+        nurtures: [
+          ['Nurture to Call', 'Automated SMS + email sequence from booking to phone call — reminders and what to have ready for the conversation.'],
+          ['Abandonment Nurture', 'If a lead fills out the form but doesn\'t book a call, an automated sequence follows up to get them scheduled.'],
+          ['No-Show Nurture', 'If a lead books a call but doesn\'t answer, a re-engagement sequence fires to reschedule.'],
+          ['Post-Call Followup', 'After the phone intro, automated followup encourages an in-gym visit and membership signup.'],
+        ],
       },
       path3: {
         title: 'Free Intro Session — High Touch',
@@ -884,6 +896,12 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'GHL Nurture Sequence', 'Staff Outreach', 'Schedule', 'First Visit'],
         ctas: ['Get Started', 'Book Your Free Intro', 'Request a Free Session'],
+        nurtures: [
+          ['Nurture to Session', 'Automated SMS + email keeps the lead warm while staff reaches out to schedule — builds anticipation and reduces drop-off.'],
+          ['Abandonment Nurture', 'If a lead submits the form but staff can\'t reach them, an automated sequence continues to engage and prompt a response.'],
+          ['No-Show Nurture', 'If a lead is scheduled but doesn\'t show, a re-engagement sequence fires to reschedule the session.'],
+          ['Post-Session Followup', 'After the intro, automated followup encourages membership signup — recap, next steps, and a clear offer.'],
+        ],
       },
       path4: {
         title: 'Free Trial Class — GHL Self Book',
@@ -896,6 +914,12 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'Choose Class (GHL Calendar)', 'Confirmation', 'First Visit'],
         ctas: ['Try a Free Class', 'See Our Schedule', 'Book a Free Trial Class'],
+        nurtures: [
+          ['Nurture to Class', 'Automated SMS + email from booking to class day — reminders, what to bring, and what to expect in the first class.'],
+          ['Abandonment Nurture', 'If a lead fills out the form but doesn\'t pick a class, an automated sequence follows up to get them booked.'],
+          ['No-Show Nurture', 'If a lead books a class but doesn\'t show, a re-engagement sequence fires to get them into the next available session.'],
+          ['Post-Class Followup', 'After the trial class, automated followup encourages membership signup — how it went, next class options, and a membership offer.'],
+        ],
       },
       path5: {
         title: 'Free Trial Class — Core Self Book',
@@ -908,6 +932,11 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'Receive Core LP Link', 'Book on Core LP', 'First Visit'],
         ctas: ['Try a Free Class', 'Book Your Free Trial', 'Get Started Free'],
+        nurtures: [
+          ['Nurture to Class', 'Automated SMS + email after form submission — delivers the Core booking link and follows up with reminders leading up to class day.'],
+          ['Abandonment Nurture', 'If a lead fills out the GHL form but doesn\'t complete booking on Core, an automated sequence re-sends the link and encourages action.'],
+          ['Post-Class Followup', 'After the trial class, automated followup encourages membership signup — how it went, next class options, and a membership offer.'],
+        ],
       },
       path6: {
         title: 'Paid Trial',
@@ -920,6 +949,11 @@
         ],
         flow: ['CTA', 'Enter Info (GHL Form)', 'Receive Core LP Link', 'Complete Payment (Core LP)', 'First Visit'],
         ctas: ['Try 7 Days for $7', '2 Weeks for $29', 'Get Full Access for $19'],
+        nurtures: [
+          ['Nurture to Payment', 'Automated SMS + email after form submission — delivers the Core payment link with urgency messaging to complete the purchase.'],
+          ['Abandonment Nurture', 'If a lead fills out the GHL form but doesn\'t complete payment on Core, an automated sequence re-sends the link and reinforces the offer value.'],
+          ['Post-Trial Followup', 'As the trial period winds down, automated followup encourages full membership conversion — trial recap, results check-in, and a membership offer.'],
+        ],
       },
 
       // ── Pre-Open Launch Kit ──
@@ -988,6 +1022,15 @@
         html += `<span class="drawer-flow-step">${step}</span>`;
       });
       html += '</div>';
+
+      if (d.nurtures) {
+        html += '<h3>What You Get</h3>';
+        html += '<table class="drawer-table">';
+        d.nurtures.forEach(([label, val]) => {
+          html += `<tr><td>${label}</td><td>${val}</td></tr>`;
+        });
+        html += '</table>';
+      }
 
       html += `<h3>${ctaHeading}</h3>`;
       html += '<div class="drawer-cta-examples">';
