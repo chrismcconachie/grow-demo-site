@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grow Demo Sites</title>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -19,44 +16,191 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Top Nav Bar ── */
+    .top-bar {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .top-bar-logo {
+      width: 32px;
+      height: 32px;
+      background: #111;
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .top-bar-brand {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111;
+    }
+    .top-bar-sep {
+      color: #d1d5db;
+      font-size: 18px;
+      font-weight: 300;
+    }
+    .top-bar-page {
+      font-size: 15px;
+      color: #6b7280;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 48px;
+    }
+    .hero-content { max-width: 800px; }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero-title .highlight { color: #2563eb; }
+    .hero-subtitle {
+      font-size: 18px;
+      color: #6b7280;
+      line-height: 1.6;
+      max-width: 640px;
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .hero-stat {
+      font-size: 14px;
+      color: #9ca3af;
+      font-variant-numeric: tabular-nums;
+    }
+    .hero-stat strong {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+      margin-right: 6px;
+    }
+
+    /* ── Section Nav ── */
+    .section-nav {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+      display: flex;
+      gap: 32px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+    }
+    .section-nav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+    .section-nav a:hover { color: #111; }
+    .section-nav a span {
+      font-variant-numeric: tabular-nums;
+    }
+
     .page {
       max-width: 1320px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 0 24px 80px;
     }
 
+    /* ── Section Headers ── */
     .section-header {
-      text-align: center;
+      text-align: left;
       margin-bottom: 40px;
     }
-
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
     .section-header h1 {
       font-size: 36px;
       font-weight: 700;
       color: #111;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-
+    .section-count {
+      font-size: 13px;
+      font-weight: 500;
+      color: #9ca3af;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 4px 14px;
+      white-space: nowrap;
+    }
     .section-header p {
       font-size: 17px;
       color: #555;
+      max-width: 600px;
     }
 
+    /* Sub-section headers (verticals) */
+    .sub-header {
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .sub-header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .section-divider { margin-top: 0; }
+
+    /* ── Card Grids ── */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
       margin-bottom: 80px;
     }
-
     .card-grid.two-col {
       grid-template-columns: repeat(2, 1fr);
       max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
       margin-bottom: 80px;
     }
 
+    /* ── Cards ── */
     .card {
       background: #fff;
       border-radius: 12px;
@@ -68,33 +212,45 @@
       text-decoration: none;
       color: inherit;
     }
-
     .card:hover {
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
       transform: translateY(-2px);
     }
-
+    .card-image-wrap {
+      position: relative;
+    }
+    .card-image-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 33.33%;
+      background: linear-gradient(to top, rgba(0,0,0,0.30), rgba(0,0,0,0));
+      pointer-events: none;
+    }
     .card-image {
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: cover;
       display: block;
     }
-
     .card-body {
       padding: 20px 24px 24px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
-
     .card-title {
       font-size: 18px;
       font-weight: 600;
       color: #111;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-
     .card-desc {
       font-size: 15px;
       color: #555;
@@ -102,28 +258,80 @@
       flex: 1;
     }
 
+    /* Card meta tags row */
+    .card-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 3px 10px;
+      letter-spacing: 0.02em;
+    }
+    .tag-sales { background: #ecfdf5; color: #065f46; }
+    .tag-common { background: #fef3c7; color: #92400e; }
+    .tag-capture { background: #eff6ff; color: #1e40af; }
+    .card-chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      background: #111;
+      color: #fff;
+      border-radius: 20px;
+      padding: 3px 10px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* Card links row */
+    .card-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-top: 16px;
+    }
     .card-link {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
       color: #2563eb;
       text-decoration: none;
-      margin-top: 16px;
       transition: gap 0.2s ease;
     }
+    .card:hover .card-link { gap: 8px; }
+    .card-link::after { content: '\2192'; }
 
-    .card:hover .card-link {
-      gap: 8px;
+    .card-link-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      font-family: inherit;
+      transition: color 0.15s;
     }
-
-    .card-link::after {
-      content: '\2192';
-    }
-
-    .section-divider {
-      margin-top: 0;
+    .card-link-info:hover { color: #111; }
+    .card-link-info::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+      opacity: 0.5;
     }
 
     .card-badge {
@@ -138,333 +346,683 @@
       letter-spacing: 0.02em;
     }
 
-    @media (max-width: 960px) {
-      .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .card-grid.two-col {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    /* ── Side Drawer ── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .drawer-overlay.open { opacity: 1; visibility: visible; }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 480px;
+      max-width: 90vw;
+      height: 100vh;
+      background: #fff;
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      box-shadow: -8px 0 32px rgba(0,0,0,0.12);
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 24px 28px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 1;
+    }
+    .drawer-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.3;
+      padding-right: 16px;
+    }
+    .drawer-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #6b7280;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .drawer-close:hover { color: #111; }
+
+    .drawer-body { padding: 24px 28px 40px; }
+
+    .drawer-body h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+      margin-bottom: 12px;
+      margin-top: 24px;
+    }
+    .drawer-body h3:first-child { margin-top: 0; }
+
+    .drawer-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+    }
+    .drawer-table td {
+      padding: 10px 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: top;
+    }
+    .drawer-table td:first-child {
+      font-weight: 600;
+      color: #374151;
+      width: 110px;
+      white-space: nowrap;
+    }
+    .drawer-table td:last-child { color: #555; }
+
+    .drawer-cta-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .drawer-cta-example {
+      font-size: 12px;
+      background: #f3f4f6;
+      color: #374151;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
     }
 
+    .drawer-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .drawer-flow-step {
+      font-size: 12px;
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .drawer-flow-arrow {
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    .drawer-view-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .drawer-view-demo:hover { background: #1d4ed8; }
+    .drawer-view-demo::after { content: '\2192'; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .card-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+      .hero { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .hero-stats { text-align: left; flex-direction: row; flex-wrap: wrap; gap: 16px; }
+    }
     @media (max-width: 600px) {
-      .card-grid,
-      .card-grid.two-col {
-        grid-template-columns: 1fr;
-      }
-      .page {
-        padding: 40px 16px 60px;
-      }
-      .section-header h1 {
-        font-size: 28px;
-      }
+      .card-grid, .card-grid.two-col { grid-template-columns: 1fr; }
+      .page { padding: 0 16px 60px; }
+      .section-header h1 { font-size: 28px; }
+      .section-nav { gap: 20px; flex-wrap: wrap; }
+      .hero { padding: 40px 16px 32px; }
+      .drawer { width: 100vw; }
     }
   </style>
 </head>
 <body>
+  <!-- ── Top Bar ── -->
+  <div class="top-bar">
+    <div class="top-bar-logo">P</div>
+    <span class="top-bar-brand">PushPress</span>
+    <span class="top-bar-sep">/</span>
+    <span class="top-bar-page">Grow Demo Library</span>
+  </div>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Internal &middot; Sales + Onboarding</div>
+      <h1 class="hero-title">Reference library for every <span class="highlight">type</span> of gym we onboard.</h1>
+      <p class="hero-subtitle">Browse templates, onboarding paths, pre-open kits, and live client builds &mdash; then point a prospect at the right one.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>2</strong> templates</div>
+      <div class="hero-stat"><strong>6</strong> onboarding paths</div>
+      <div class="hero-stat"><strong>5</strong> live client sites</div>
+      <div class="hero-stat"><strong>6</strong> multi-location</div>
+    </div>
+  </div>
+
+  <!-- ── Section Nav ── -->
+  <nav class="section-nav">
+    <a href="#templates"><span>01</span> &middot; Templates</a>
+    <a href="#onboarding"><span>02</span> &middot; Onboarding Paths</a>
+    <a href="#preopen"><span>03</span> &middot; Pre-Open Kit</a>
+    <a href="#clients"><span>04</span> &middot; Client Sites</a>
+  </nav>
+
   <div class="page">
-    <!-- Template Options Section -->
-    <div class="section-header">
-      <h1>Template Options</h1>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- Template Options -->
+    <!-- ════════════════════════════════════ -->
+    <div class="section-header" id="templates">
+      <div class="section-label">01 &middot; Templates</div>
+      <h1>Template Options <span class="section-count">2 sites</span></h1>
       <p>Choose a design style for your website</p>
     </div>
 
     <div class="card-grid two-col">
-      <!-- Bold Template -->
-      <a class="card" href="http://pushpress-site-bold-demo.webflow.io/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/bold.png"
-          alt="Bold Template"
-        />
+      <a class="card" href="https://free-intro-session-self-book.webflow.io/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/demo-free-intro-self-book.png" alt="Bold Template" /></div>
         <div class="card-body">
           <div class="card-title">Bold</div>
           <div class="card-desc">High-impact design with bold typography and dark overlays. Built to command attention and energize your brand.</div>
-          <span class="card-link">Preview Template</span>
+          <div class="card-links">
+            <span class="card-link">Preview Template</span>
+          </div>
         </div>
       </a>
-
-      <!-- Modern Template -->
-      <a class="card" href="http://pushpress-site-modern.webflow.io/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/modern.png"
-          alt="Modern Template"
-        />
+      <a class="card" href="https://pushpress-site-modern.webflow.io/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/modern.png" alt="Modern Template" /></div>
         <div class="card-body">
           <div class="card-title">Modern</div>
           <div class="card-desc">Clean, refined layout with elegant typography and a polished feel. A sophisticated look that puts your content first.</div>
-          <span class="card-link">Preview Template</span>
+          <div class="card-links">
+            <span class="card-link">Preview Template</span>
+          </div>
         </div>
       </a>
     </div>
 
-    <!-- Demo Sites Section -->
-    <div class="section-header">
-      <h1>Onboarding Method</h1>
-      <p>Tailor your site's onboarding experience to match your CTA</p>
+    <!-- ════════════════════════════════════ -->
+    <!-- Onboarding Method (6 paths) -->
+    <!-- ════════════════════════════════════ -->
+    <div class="section-header" id="onboarding">
+      <div class="section-label">02 &middot; Onboarding Paths</div>
+      <h1>Onboarding Method <span class="section-count">6 paths</span></h1>
+      <p>Each path defines the prospect's journey from first website visit to in-gym visit. Pick the one that matches how your gym sells.</p>
     </div>
 
     <div class="card-grid">
-      <!-- Card 1 -->
-      <a class="card" href="https://example.com/demo1" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/demo-screenshot.png"
-          alt="Free Intro Session — Self-Book"
-        />
+      <!-- Path 1 -->
+      <div class="card">
+        <a href="https://free-intro-session-self-book.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-intro-self-book.png" alt="Free Intro Session — Self Book (In Person)" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Free Intro Session — Self-Book</div>
-          <div class="card-desc">For businesses with set staff availability. Leads pick a time that works and book instantly.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-title">Free Intro Session <span class="card-chip">Self Book · In Person</span></div>
+          <div class="card-desc">For gyms with open scheduling and a 1-on-1 intro model. Prospects book a time slot and walk in for an in-person session.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-intro-session-self-book.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path1">Who is this for?</button>
+          </div>
         </div>
-      </a>
+      </div>
 
-      <!-- Card 2 -->
-      <a class="card" href="https://example.com/demo2" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/demo-screenshot.png"
-          alt="Free Intro Session — High Touch"
-        />
+      <!-- Path 2 -->
+      <div class="card">
+        <a href="https://free-intro-session-self-book.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-intro-self-book.png" alt="Free Intro Session — Self Book (Phone Call)" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Free Intro Session — High Touch</div>
-          <div class="card-desc">For businesses that prefer a personal approach. Staff connects directly to find the right starting point.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-title">Free Intro Session <span class="card-chip">Self Book · Phone Call</span></div>
+          <div class="card-desc">Same self-book model, but the intro happens over the phone. Great when the conversation matters more than the facility tour.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-intro-session-self-book.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path2">Who is this for?</button>
+          </div>
         </div>
-      </a>
+      </div>
 
-      <!-- Card 3 -->
-      <a class="card" href="https://example.com/demo3" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/demo-screenshot.png"
-          alt="Free Trial Class — Self-Book"
-        />
+      <!-- Path 3 -->
+      <div class="card">
+        <a href="https://free-intro-session-high-touch.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-intro-high-touch.png" alt="Free Intro Session — High Touch" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Free Trial Class — Self-Book</div>
-          <div class="card-desc">Let leads browse your class schedule and drop into a session to experience your facility firsthand.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-title">Free Intro Session <span class="card-chip">High Touch</span></div>
+          <div class="card-desc">Staff manually follows up with every lead. Best for gyms that value personal relationships in the sales process or can't maintain an accurate online calendar.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-intro-session-high-touch.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path3">Who is this for?</button>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
 
-    <!-- Row 2 of demos (2 cards centered) -->
-    <div class="card-grid two-col">
-      <!-- Card 4 -->
-      <a class="card" href="https://example.com/demo4" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/demo-screenshot.png"
-          alt="Free Trial Class — High Touch"
-        />
+    <div class="card-grid">
+      <!-- Path 4 -->
+      <div class="card">
+        <a href="https://free-trial-class-self-book.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-ghl-self-book.png" alt="Free Trial Class — GHL Self Book" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Free Trial Class — High Touch</div>
-          <div class="card-desc">For businesses that need to protect class sizes. Leads book a real spot so your schedule stays accurate.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-title">Free Trial Class <span class="card-chip">GHL Self Book</span></div>
+          <div class="card-desc">Prospects browse the class schedule and drop into a session. Lowest-friction path from click to class booking. GHL calendar embedded on site.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-trial-class-self-book.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path4">Who is this for?</button>
+          </div>
         </div>
-      </a>
+      </div>
 
-      <!-- Card 5 -->
-      <a class="card" href="https://example.com/demo5" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/demo-screenshot.png"
-          alt="Paid Trial — Discounted Access"
-        />
+      <!-- Path 5 -->
+      <div class="card">
+        <a href="https://free-trial-class-high-touch.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-core-self-book.png" alt="Free Trial Class — Core Self Book" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Paid Trial — Discounted Access</div>
-          <div class="card-desc">A low-commitment offer like $7 for 7 days. Leads book and pay upfront — only serious prospects walk in.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-title">Free Trial Class <span class="card-chip">Core Self Book</span></div>
+          <div class="card-desc">GHL captures the lead, then sends a Core landing page link to book. Trial leads go into Core's check-in and attendance system from day one.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-trial-class-high-touch.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path5">Who is this for?</button>
+          </div>
         </div>
-      </a>
+      </div>
+
+      <!-- Path 6 -->
+      <div class="card">
+        <a href="https://paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-paid-trial.png" alt="Paid Trial" /></div>
+        </a>
+        <div class="card-body">
+          <div class="card-title">Paid Trial <span class="card-chip">Core + Payment</span></div>
+          <div class="card-desc">A low-commitment offer like $7 for 7 days. GHL captures the lead, then sends a Core landing page link to complete payment. Only serious prospects walk in.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path6">Who is this for?</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Pre-Open Launch Kit Section -->
-    <div class="section-header section-divider">
-      <h1>Pre-Open Launch Kit</h1>
+    <!-- ════════════════════════════════════ -->
+    <!-- Pre-Open Launch Kit -->
+    <!-- ════════════════════════════════════ -->
+    <div class="section-header section-divider" id="preopen">
+      <div class="section-label">03 &middot; Pre-Open Kit</div>
+      <h1>Pre-Open Launch Kit <span class="section-count">2 pages</span></h1>
       <p>Help gyms open with members and revenue from day one</p>
     </div>
 
     <div class="card-grid two-col">
-      <!-- Interest List -->
-      <a class="card" href="https://1page-template.webflow.io/interest-list" target="_blank" rel="noopener">
-        <img class="card-image" src="images/demo-screenshot.png" alt="Interest List" />
+      <div class="card">
+        <a href="https://beta-gym-1-page.webflow.io/interest-list" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-interest-list.png" alt="Interest List" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Interest List</div>
+          <div class="card-title">Interest List <span class="card-chip">Phase 1</span></div>
           <div class="card-desc">A simple "opening soon" page to start capturing demand before your gym opens. Collects names and emails — no pricing, no selling.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-links">
+            <a class="card-link" href="https://beta-gym-1-page.webflow.io/interest-list" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="interestList">When to use this</button>
+          </div>
         </div>
-      </a>
-
-      <!-- Founder Pre-Sell -->
-      <a class="card" href="https://1page-template.webflow.io/founder-membership" target="_blank" rel="noopener">
-        <img class="card-image" src="images/demo-screenshot.png" alt="Founder Pre-Sell" />
+      </div>
+      <div class="card">
+        <a href="https://beta-gym-1-page.webflow.io/founder-membership" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-founder-presell.png" alt="Founder Pre-Sell" /></div>
+        </a>
         <div class="card-body">
-          <div class="card-title">Founder Pre-Sell</div>
+          <div class="card-title">Founder Pre-Sell <span class="card-chip">Phase 2</span></div>
           <div class="card-desc">A conversion-focused page that turns early interest into paid founding memberships before opening day. Built around urgency and a clear founder offer.</div>
-          <span class="card-link">View Demo</span>
+          <div class="card-links">
+            <a class="card-link" href="https://beta-gym-1-page.webflow.io/founder-membership" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="founderPreSell">When to use this</button>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
 
-    <!-- Client Sites Section -->
-    <div class="section-header section-divider">
-      <h1>Client Sites</h1>
-      <p>Explore our client success stories</p>
+    <!-- ════════════════════════════════════ -->
+    <!-- Client Sites — By Vertical -->
+    <!-- ════════════════════════════════════ -->
+    <div class="section-header section-divider" id="clients">
+      <div class="section-label">04 &middot; Client Sites</div>
+      <h1>Client Sites <span class="section-count">11 sites</span></h1>
+      <p>Real websites built on Grow, organized by fitness vertical</p>
     </div>
 
+    <!-- CrossFit -->
+    <div class="sub-header"><h2>CrossFit</h2></div>
     <div class="card-grid">
-      <!-- Client 1 -->
       <a class="card" href="https://www.eastyardcrossfit.com/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/east-yard-crossfit.png"
-          alt="East Yard CrossFit"
-        />
+        <div class="card-image-wrap"><img class="card-image" src="images/east-yard-crossfit.png" alt="East Yard CrossFit" /></div>
         <div class="card-body">
           <div class="card-title">East Yard CrossFit</div>
           <div class="card-desc">Premier CrossFit box in Brooklyn, NY specializing in functional fitness and community-driven training.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
+    </div>
 
-      <!-- Client 2 -->
+    <!-- Strength & Conditioning -->
+    <div class="sub-header"><h2>Strength &amp; Conditioning</h2></div>
+    <div class="card-grid">
       <a class="card" href="https://rsc-athletics.webflow.io/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/rsc-athletics.png"
-          alt="RSC Athletics"
-        />
+        <div class="card-image-wrap"><img class="card-image" src="images/rsc-athletics.png" alt="RSC Athletics" /></div>
         <div class="card-body">
           <div class="card-title">RSC Athletics</div>
           <div class="card-desc">High-performance athletic training center in Texas focused on strength and conditioning for all levels.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Client 3 -->
-      <a class="card" href="https://www.omegaata.com/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/omega-ata.png"
-          alt="Omega ATA"
-        />
-        <div class="card-body">
-          <div class="card-title">Omega ATA</div>
-          <div class="card-desc">Traditional Taekwondo martial arts academy in California offering classes for kids and adults.</div>
-          <span class="card-link">Visit Site</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Row 2 of clients (2 cards centered) -->
-    <div class="card-grid two-col">
-      <!-- Client 4 -->
       <a class="card" href="https://www.tonka-fitness.com/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/tonka-fitness.png"
-          alt="Tonka Fitness"
-        />
+        <div class="card-image-wrap"><img class="card-image" src="images/tonka-fitness.png" alt="Tonka Fitness" /></div>
         <div class="card-body">
           <div class="card-title">Tonka Fitness</div>
           <div class="card-desc">Modern fitness center in Minnesota delivering personalized training and group fitness classes.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Client 5 -->
       <a class="card" href="https://www.ksathleticclub.com/" target="_blank" rel="noopener">
-        <img
-          class="card-image"
-          src="images/ks-athletic-club.png"
-          alt="KS Athletic Club"
-        />
+        <div class="card-image-wrap"><img class="card-image" src="images/ks-athletic-club.png" alt="KS Athletic Club" /></div>
         <div class="card-body">
           <div class="card-title">KS Athletic Club</div>
           <div class="card-desc">CrossFit gym in Overland Park, Kansas offering group fitness, bootcamp, personal training, and youth programs.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
     </div>
 
-    <!-- Multi-Location Sites Section -->
-    <div class="section-header section-divider">
-      <h1>Multi-Location Sites</h1>
-      <p>Websites built for businesses operating across multiple locations</p>
+    <!-- Martial Arts -->
+    <div class="sub-header"><h2>Martial Arts</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.omegaata.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/omega-ata.png" alt="Omega ATA" /></div>
+        <div class="card-body">
+          <div class="card-title">Omega ATA</div>
+          <div class="card-desc">Traditional Taekwondo martial arts academy in California offering classes for kids and adults.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
     </div>
 
+    <!-- Multi-Location -->
+    <div class="sub-header"><h2>Multi-Location</h2></div>
     <div class="card-grid">
-      <!-- Multi 1 -->
       <a class="card" href="https://crossfit-super7.webflow.io/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/super7.png" alt="CrossFit Super7" />
+        <div class="card-image-wrap"><img class="card-image" src="images/super7.png" alt="CrossFit Super7" /></div>
         <div class="card-body">
-          <span class="card-badge">2 Locations</span>
-          <div class="card-title">CrossFit Super7</div>
+          <div class="card-title">CrossFit Super7 <span class="card-chip">2 Locations</span></div>
           <div class="card-desc">CrossFit affiliate with two locations, each featuring dedicated schedules, programs, and contact information.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Multi 2 -->
       <a class="card" href="https://crossfit-threefold-ee1387.webflow.io/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/threefold.png" alt="CrossFit Threefold" />
+        <div class="card-image-wrap"><img class="card-image" src="images/threefold.png" alt="CrossFit Threefold" /></div>
         <div class="card-body">
-          <span class="card-badge">2 Locations</span>
-          <div class="card-title">CrossFit Threefold</div>
+          <div class="card-title">CrossFit Threefold <span class="card-chip">2 Locations</span></div>
           <div class="card-desc">Multi-location CrossFit gym with location-specific pages for schedules, pricing, and class offerings.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Multi 3 -->
       <a class="card" href="https://www.strongsidefitness.com/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/strongside.png" alt="Strongside Fitness" />
+        <div class="card-image-wrap"><img class="card-image" src="images/strongside.png" alt="Strongside Fitness" /></div>
         <div class="card-body">
-          <span class="card-badge">3 Locations</span>
-          <div class="card-title">Strongside Fitness</div>
+          <div class="card-title">Strongside Fitness <span class="card-chip">3 Locations</span></div>
           <div class="card-desc">Growing fitness brand with three locations, each with its own programs, staff, and community.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
     </div>
 
-    <!-- Row 2 of multi-location (3 cards) -->
     <div class="card-grid">
-      <!-- Multi 4 -->
       <a class="card" href="https://crossfit-646.webflow.io/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/cf646.png" alt="CrossFit 646" />
+        <div class="card-image-wrap"><img class="card-image" src="images/cf646.png" alt="CrossFit 646" /></div>
         <div class="card-body">
-          <span class="card-badge">2 Locations</span>
-          <div class="card-title">CrossFit 646</div>
+          <div class="card-title">CrossFit 646 <span class="card-chip">2 Locations</span></div>
           <div class="card-desc">CrossFit gym serving two communities with tailored class schedules and location-specific onboarding.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Multi 5 -->
       <a class="card" href="https://team-papakolea-jiu-jitsu.webflow.io/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/Papakolea.png" alt="Team Papakolea Jiu-Jitsu" />
+        <div class="card-image-wrap"><img class="card-image" src="images/Papakolea.png" alt="Team Papakolea Jiu-Jitsu" /></div>
         <div class="card-body">
-          <span class="card-badge">2 Locations</span>
-          <div class="card-title">Team Papakolea Jiu-Jitsu</div>
+          <div class="card-title">Team Papakolea Jiu-Jitsu <span class="card-chip">2 Locations</span></div>
           <div class="card-desc">Hawaiian jiu-jitsu academy with two training locations, unified branding, and per-location schedules.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
-
-      <!-- Multi 6 -->
       <a class="card" href="https://www.tailormadecoaching.ie/" target="_blank" rel="noopener">
-        <img class="card-image" src="images/Tailormade.png" alt="Tailormade Coaching" />
+        <div class="card-image-wrap"><img class="card-image" src="images/Tailormade.png" alt="Tailormade Coaching" /></div>
         <div class="card-body">
-          <span class="card-badge">7 Locations</span>
-          <div class="card-title">Tailormade Coaching</div>
+          <div class="card-title">Tailormade Coaching <span class="card-chip">7 Locations</span></div>
           <div class="card-desc">Ireland's largest multi-location fitness brand with seven gyms, each with dedicated pages and local programming.</div>
-          <span class="card-link">Visit Site</span>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
     </div>
   </div>
+
+  <!-- ════════════════════════════════════ -->
+  <!-- Side Drawer -->
+  <!-- ════════════════════════════════════ -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h2 id="drawer-title"></h2>
+      <button class="drawer-close" id="drawer-close">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+
+  <script>
+    // ── Drawer Data ──
+    const drawerData = {
+      path1: {
+        title: 'Free Intro Session — Self Book (In Person)',
+        url: 'https://free-intro-session-self-book.webflow.io/',
+        rows: [
+          ['Gym Type', 'Boutique gyms, personal training studios, CrossFit gyms, martial arts gyms, or any gym where a 1-on-1 intro session is the standard first step.'],
+          ['Sales Style', 'Self-service. The prospect books directly without staff intervention.'],
+          ['Ideal When', 'The gym wants to reduce friction and let motivated prospects lock in a time immediately. Staff capacity exists to honor same-day or next-day bookings.'],
+          ['Tech', 'GHL Form + GHL Appointment Calendar embedded on the Grow website.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Select Date/Time (GHL Calendar)', 'Confirmation', 'First Visit'],
+        ctas: ['Book Your Free Intro', 'Schedule a Free Session', 'Claim Your Free 1-on-1'],
+      },
+      path2: {
+        title: 'Free Intro Session — Self Book (Phone Call)',
+        url: 'https://free-intro-session-self-book.webflow.io/',
+        rows: [
+          ['Gym Type', 'Same gym types as In Person, but the initial intro happens over the phone. Common when the gym serves a wider geographic area or runs a consultation-style intro.'],
+          ['Sales Style', 'Self-service. The prospect books a phone call directly without staff intervention.'],
+          ['Ideal When', "The gym's intro is primarily a conversation (goal-setting, pricing, program fit) rather than a physical tour. Also useful when prospects are researching remotely."],
+          ['Tech', 'GHL Form + GHL Appointment Calendar (configured as phone call type).'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Select Date/Time (GHL Calendar)', 'Confirmation', 'Phone Call', 'First Visit'],
+        ctas: ['Book Your Free Intro Call', 'Schedule a Free Consultation', 'Talk to a Coach'],
+      },
+      path3: {
+        title: 'Free Intro Session — High Touch',
+        url: 'https://free-intro-session-high-touch.webflow.io/',
+        rows: [
+          ['Gym Type', 'Gyms with a dedicated sales team or owner-operators who want to personally connect with every lead. Examples: a martial arts gym where the head instructor calls every lead, a CrossFit gym where the owner matches each prospect to the right coach.'],
+          ['Sales Style', 'High touch. Staff manually follows up with every lead. Common where the close rate is highest when a coach builds rapport first.'],
+          ['Ideal When', "The gym values personal relationships in the sales process, or staff can't reliably manage future-looking calendar availability. If coaches' schedules shift week to week, High Touch removes the calendar from the prospect's hands."],
+          ['Tech', 'GHL Lead Capture Form (inline on hero, program pages, and Get Started page; popup modal on nav bar). No calendar exposed.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'GHL Nurture Sequence', 'Staff Outreach', 'Schedule', 'First Visit'],
+        ctas: ['Get Started', 'Book Your Free Intro', 'Request a Free Session'],
+      },
+      path4: {
+        title: 'Free Trial Class — GHL Self Book',
+        url: 'https://free-trial-class-self-book.webflow.io/',
+        rows: [
+          ['Gym Type', 'Group fitness gyms, CrossFit, HIIT studios, yoga studios, Pilates studios, or any gym where the core product is the group class experience.'],
+          ['Sales Style', 'Self-service. Prospect browses the class schedule and drops into a session. No staff outreach required.'],
+          ['Ideal When', 'Capturing every lead is the top priority, and the gym wants the lowest-friction path from click to class booking. GHL calendar is embedded on the website.'],
+          ['Tech', 'GHL Form + GHL Appointments configured as classes. Everything embedded on the Grow website.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Choose Class (GHL Calendar)', 'Confirmation', 'First Visit'],
+        ctas: ['Try a Free Class', 'See Our Schedule', 'Book a Free Trial Class'],
+      },
+      path5: {
+        title: 'Free Trial Class — Core Self Book',
+        url: 'https://free-trial-class-high-touch.webflow.io/',
+        rows: [
+          ['Gym Type', "Group fitness gyms that want trial leads managed through Core from the start. After filling out a GHL form, the prospect receives a link to the Core landing page to browse and book classes."],
+          ['Sales Style', 'Self-service. Fully automated. GHL captures the lead, then sends the Core LP link via SMS and email.'],
+          ['Ideal When', "The gym already runs everything through Core and doesn't want to maintain a separate GHL class calendar. The trade-off: Core requires account creation, which adds more steps."],
+          ['Tech', 'GHL Lead Capture Form on website. GHL automation sends SMS + email with Core class booking LP link.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Receive Core LP Link', 'Book on Core LP', 'First Visit'],
+        ctas: ['Try a Free Class', 'Book Your Free Trial', 'Get Started Free'],
+      },
+      path6: {
+        title: 'Paid Trial',
+        url: 'https://paid-trial-discounted-access.webflow.io/',
+        rows: [
+          ['Gym Type', 'Gyms that want to qualify leads with a small financial commitment upfront. Common in CrossFit, strength gyms, and studios in competitive markets where free trials attract tire-kickers.'],
+          ['Sales Style', 'Hybrid. Initial capture is self-service (form), but trial purchase happens on a separate Core landing page.'],
+          ['Ideal When', 'The gym wants to filter out low-intent leads. A small payment ($7 for 7 days, $29 for 2 weeks) signals real interest and reduces no-shows.'],
+          ['Tech', 'GHL Lead Capture Form collects info. GHL sends SMS + email with link to Core Commerce LP for payment.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Receive Core LP Link', 'Complete Payment (Core LP)', 'First Visit'],
+        ctas: ['Try 7 Days for $7', '2 Weeks for $29', 'Get Full Access for $19'],
+      },
+
+      // ── Pre-Open Launch Kit ──
+      interestList: {
+        title: 'Interest List — Phase 1',
+        url: 'https://beta-gym-1-page.webflow.io/interest-list',
+        tableHeading: 'When To Use This',
+        flowHeading: 'Timeline',
+        ctaHeading: 'Page CTAs',
+        rows: [
+          ['Stage', 'Phase 1 — goes live first, as soon as a lease is signed. This is the first thing prospects see before the gym opens.'],
+          ['Goal', 'Establish legitimacy, anchor the gym to a real address, and capture name + email. No pricing, no selling at this stage.'],
+          ['Launch When', 'The gym has signed a lease, is not open yet, and has a planned opening window. Don\'t wait for pricing or a founder offer to be finalized.'],
+          ['What It Needs', 'Gym logo, planned opening month/year (e.g. "Opening March 2026"), and exact gym address matching the Google Business Profile.'],
+          ['What Happens Next', 'Leads are collected automatically. The pre-open nurture confirms they\'re on the list. The owner has time to craft a strong founder offer while demand builds.'],
+        ],
+        flow: ['Lease Signed', 'Interest List Live', 'Leads Captured', 'Nurture Active', 'Founder Offer Ready'],
+        ctas: ['Join the Interest List', 'Get Updates', 'Be the First to Know'],
+      },
+      founderPreSell: {
+        title: 'Founder Pre-Sell — Phase 2',
+        url: 'https://beta-gym-1-page.webflow.io/founder-membership',
+        tableHeading: 'When To Use This',
+        flowHeading: 'Timeline',
+        ctaHeading: 'Page CTAs',
+        rows: [
+          ['Stage', 'Phase 2 — replaces the Interest List at the root domain once the gym is ready to convert demand into paid commitments.'],
+          ['Goal', 'Turn early interest into paid founding memberships before opening day. Target: 50+ committed members on day one.'],
+          ['Launch When', 'The gym is confident in an opening date, has a real founder offer they\'ll stand behind, and is ready to actively convert — not just collect interest.'],
+          ['What It Needs', 'Exact opening date (for countdown timers + urgency), founder offer details (discount type, value, duration), optional membership cap (e.g. "first 75 members"), and confirmed plan setup in Core.'],
+          ['How It Converts', 'Every section exists to reduce uncertainty, increase desire, or add urgency. The page answers: "Is this gym for someone like me, and should I act now?"'],
+        ],
+        flow: ['Interest List Phase', 'Founder Offer Finalized', 'Pre-Sell Live', 'Paid Commitments', 'Opening Day'],
+        ctas: ['Lock In Founder Pricing', 'Claim Your Spot', 'Join as a Founding Member'],
+      },
+    };
+
+    // ── Drawer Logic ──
+    const overlay = document.getElementById('drawer-overlay');
+    const drawer = document.getElementById('drawer');
+    const drawerTitle = document.getElementById('drawer-title');
+    const drawerBody = document.getElementById('drawer-body');
+    const drawerClose = document.getElementById('drawer-close');
+
+    function openDrawer(key) {
+      const d = drawerData[key];
+      if (!d) return;
+
+      drawerTitle.textContent = d.title;
+
+      const tableHeading = d.tableHeading || 'Who Should Pick This';
+      const flowHeading = d.flowHeading || 'CTA Flow';
+      const ctaHeading = d.ctaHeading || 'Example CTAs';
+
+      let html = `<h3>${tableHeading}</h3>`;
+      html += '<table class="drawer-table">';
+      d.rows.forEach(([label, val]) => {
+        html += `<tr><td>${label}</td><td>${val}</td></tr>`;
+      });
+      html += '</table>';
+
+      html += `<h3>${flowHeading}</h3>`;
+      html += '<div class="drawer-flow">';
+      d.flow.forEach((step, i) => {
+        if (i > 0) html += '<span class="drawer-flow-arrow">&rarr;</span>';
+        html += `<span class="drawer-flow-step">${step}</span>`;
+      });
+      html += '</div>';
+
+      html += `<h3>${ctaHeading}</h3>`;
+      html += '<div class="drawer-cta-examples">';
+      d.ctas.forEach(cta => {
+        html += `<span class="drawer-cta-example">"${cta}"</span>`;
+      });
+      html += '</div>';
+
+      html += `<a class="drawer-view-demo" href="${d.url}" target="_blank" rel="noopener">View Demo Site</a>`;
+
+      drawerBody.innerHTML = html;
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Bind buttons
+    document.querySelectorAll('[data-drawer]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openDrawer(btn.dataset.drawer);
+      });
+    });
+    overlay.addEventListener('click', closeDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  </script>
 </body>
 </html>
