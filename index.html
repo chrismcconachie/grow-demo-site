@@ -38,14 +38,13 @@
     .top-bar-logo {
       width: 32px;
       height: 32px;
-      background: #111;
-      color: #fff;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 16px;
+      overflow: hidden;
+    }
+    .top-bar-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .top-bar-brand {
       font-size: 15px;
@@ -518,7 +517,7 @@
 <body>
   <!-- ── Top Bar ── -->
   <div class="top-bar">
-    <div class="top-bar-logo">P</div>
+    <div class="top-bar-logo"><img src="images/pushpress-logo.png" alt="PushPress"></div>
     <span class="top-bar-brand">PushPress</span>
     <span class="top-bar-sep">/</span>
     <span class="top-bar-page">Demo Site Launcher</span>
@@ -534,8 +533,8 @@
     <div class="hero-stats">
       <div class="hero-stat"><strong>2</strong> templates</div>
       <div class="hero-stat"><strong>6</strong> onboarding paths</div>
-      <div class="hero-stat"><strong>5</strong> live client sites</div>
-      <div class="hero-stat"><strong>6</strong> multi-location</div>
+      <div class="hero-stat"><strong>12</strong> live client sites</div>
+      <div class="hero-stat"><strong>3</strong> multi-location</div>
     </div>
   </div>
 
@@ -727,103 +726,13 @@
     <!-- ════════════════════════════════════ -->
     <div class="section-header section-divider" id="clients">
       <div class="section-label">04 &middot; Client Sites</div>
-      <h1>Client Sites <span class="section-count">11 sites</span></h1>
+      <h1>Client Sites <span class="section-count">15 sites</span></h1>
       <p>Real websites built on Grow, organized by fitness vertical</p>
-    </div>
-
-    <!-- CrossFit -->
-    <div class="sub-header"><h2>CrossFit</h2></div>
-    <div class="card-grid">
-      <a class="card" href="https://www.eastyardcrossfit.com/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/east-yard-crossfit.png" alt="East Yard CrossFit" /></div>
-        <div class="card-body">
-          <div class="card-title">East Yard CrossFit</div>
-          <div class="card-desc">Premier CrossFit box in Brooklyn, NY specializing in functional fitness and community-driven training.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Strength & Conditioning -->
-    <div class="sub-header"><h2>Strength &amp; Conditioning</h2></div>
-    <div class="card-grid">
-      <a class="card" href="https://rsc-athletics.webflow.io/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/rsc-athletics.png" alt="RSC Athletics" /></div>
-        <div class="card-body">
-          <div class="card-title">RSC Athletics</div>
-          <div class="card-desc">High-performance athletic training center in Texas focused on strength and conditioning for all levels.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-      <a class="card" href="https://www.tonka-fitness.com/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/tonka-fitness.png" alt="Tonka Fitness" /></div>
-        <div class="card-body">
-          <div class="card-title">Tonka Fitness</div>
-          <div class="card-desc">Modern fitness center in Minnesota delivering personalized training and group fitness classes.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-      <a class="card" href="https://www.ksathleticclub.com/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/ks-athletic-club.png" alt="KS Athletic Club" /></div>
-        <div class="card-body">
-          <div class="card-title">KS Athletic Club</div>
-          <div class="card-desc">CrossFit gym in Overland Park, Kansas offering group fitness, bootcamp, personal training, and youth programs.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Martial Arts -->
-    <div class="sub-header"><h2>Martial Arts</h2></div>
-    <div class="card-grid">
-      <a class="card" href="https://www.omegaata.com/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/omega-ata.png" alt="Omega ATA" /></div>
-        <div class="card-body">
-          <div class="card-title">Omega ATA</div>
-          <div class="card-desc">Traditional Taekwondo martial arts academy in California offering classes for kids and adults.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
     </div>
 
     <!-- Multi-Location -->
     <div class="sub-header"><h2>Multi-Location</h2></div>
     <div class="card-grid">
-      <a class="card" href="https://crossfit-super7.webflow.io/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/super7.png" alt="CrossFit Super7" /></div>
-        <div class="card-body">
-          <div class="card-title">CrossFit Super7 <span class="card-chip">2 Locations</span></div>
-          <div class="card-desc">CrossFit affiliate with two locations, each featuring dedicated schedules, programs, and contact information.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-      <a class="card" href="https://crossfit-threefold-ee1387.webflow.io/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/threefold.png" alt="CrossFit Threefold" /></div>
-        <div class="card-body">
-          <div class="card-title">CrossFit Threefold <span class="card-chip">2 Locations</span></div>
-          <div class="card-desc">Multi-location CrossFit gym with location-specific pages for schedules, pricing, and class offerings.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-      <a class="card" href="https://www.strongsidefitness.com/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/strongside.png" alt="Strongside Fitness" /></div>
-        <div class="card-body">
-          <div class="card-title">Strongside Fitness <span class="card-chip">3 Locations</span></div>
-          <div class="card-desc">Growing fitness brand with three locations, each with its own programs, staff, and community.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
-    </div>
-
-    <div class="card-grid">
-      <a class="card" href="https://crossfit-646.webflow.io/" target="_blank" rel="noopener">
-        <div class="card-image-wrap"><img class="card-image" src="images/cf646.png" alt="CrossFit 646" /></div>
-        <div class="card-body">
-          <div class="card-title">CrossFit 646 <span class="card-chip">2 Locations</span></div>
-          <div class="card-desc">CrossFit gym serving two communities with tailored class schedules and location-specific onboarding.</div>
-          <div class="card-links"><span class="card-link">Visit Site</span></div>
-        </div>
-      </a>
       <a class="card" href="https://team-papakolea-jiu-jitsu.webflow.io/" target="_blank" rel="noopener">
         <div class="card-image-wrap"><img class="card-image" src="images/Papakolea.png" alt="Team Papakolea Jiu-Jitsu" /></div>
         <div class="card-body">
@@ -840,7 +749,137 @@
           <div class="card-links"><span class="card-link">Visit Site</span></div>
         </div>
       </a>
+      <a class="card" href="https://crossfit-646.webflow.io/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/cf646.png" alt="CrossFit 646" /></div>
+        <div class="card-body">
+          <div class="card-title">CrossFit 646 <span class="card-chip">2 Locations</span></div>
+          <div class="card-desc">CrossFit gym serving two communities with tailored class schedules and location-specific onboarding.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
     </div>
+
+    <!-- CrossFit -->
+    <div class="sub-header"><h2>CrossFit</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.eastyardcrossfit.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/east-yard-crossfit.png" alt="East Yard CrossFit" /></div>
+        <div class="card-body">
+          <div class="card-title">East Yard CrossFit</div>
+          <div class="card-desc">Premier CrossFit box in Brooklyn, NY specializing in functional fitness and community-driven training.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.prvnnashville.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/PRVN.png" alt="PRVN Nashville" /></div>
+        <div class="card-body">
+          <div class="card-title">PRVN Nashville</div>
+          <div class="card-desc">CrossFit affiliate in Nashville, TN with competition-level programming and a strong community focus.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Strength & Conditioning -->
+    <div class="sub-header"><h2>Strength &amp; Conditioning</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.tonka-fitness.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/tonka-fitness.png" alt="Tonka Fitness" /></div>
+        <div class="card-body">
+          <div class="card-title">Tonka Fitness</div>
+          <div class="card-desc">Modern fitness center in Minnesota delivering personalized training and group fitness classes.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.ksathleticclub.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/ksac.png" alt="KS Athletic Club" /></div>
+        <div class="card-body">
+          <div class="card-title">KS Athletic Club</div>
+          <div class="card-desc">CrossFit gym in Overland Park, Kansas offering group fitness, bootcamp, personal training, and youth programs.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.parkcityfit.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/park_city.png" alt="Park City Fit" /></div>
+        <div class="card-body">
+          <div class="card-title">Park City Fit</div>
+          <div class="card-desc">Strength and conditioning gym in Park City, UT offering personal training and group fitness programs.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Yoga / Pilates -->
+    <div class="sub-header"><h2>Yoga / Pilates</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.drippilatesstudio.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/drip-pilates.png" alt="Drip Pilates" /></div>
+        <div class="card-body">
+          <div class="card-title">Drip Pilates</div>
+          <div class="card-desc">Infrared mat Pilates studio in Cape Coral, FL with a bold brand and founder membership model.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.viapilates.ca/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/Vía_Pilates.png" alt="Vía Pilates" /></div>
+        <div class="card-body">
+          <div class="card-title">Vía Pilates</div>
+          <div class="card-desc">Pilates studio in Canada offering reformer and mat classes in a modern, welcoming environment.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.mvmts.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/MVMTS.png" alt="MVMTS" /></div>
+        <div class="card-body">
+          <div class="card-title">MVMTS</div>
+          <div class="card-desc">Movement-focused studio blending Pilates, yoga, and functional training into a unified fitness experience.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Sports Performance -->
+    <div class="sub-header"><h2>Sports Performance</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://rsc-athletics.webflow.io/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/rsc-athletics.png" alt="RSC Athletics" /></div>
+        <div class="card-body">
+          <div class="card-title">RSC Athletics</div>
+          <div class="card-desc">High-performance athletic training center in Texas focused on strength and conditioning for all levels.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.just-train-hq.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/just_train.png" alt="Just Train" /></div>
+        <div class="card-body">
+          <div class="card-title">Just Train</div>
+          <div class="card-desc">Sports performance training facility focused on developing athletes through structured programming and coaching.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Martial Arts -->
+    <div class="sub-header"><h2>Martial Arts</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.omegaata.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/omega.png" alt="Omega ATA" /></div>
+        <div class="card-body">
+          <div class="card-title">Omega ATA</div>
+          <div class="card-desc">Traditional Taekwondo martial arts academy in California offering classes for kids and adults.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://www.k2kfitness.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/k2k.png" alt="K2K Fitness" /></div>
+        <div class="card-body">
+          <div class="card-title">K2K Fitness</div>
+          <div class="card-desc">Martial arts and fitness facility combining combat training with functional fitness programming.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
   </div>
 
   <!-- ════════════════════════════════════ -->
