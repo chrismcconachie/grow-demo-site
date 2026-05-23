@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <title>Demo Site Launcher — PushPress Grow</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RMNGZJ98F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3RMNGZJ98F');
+  </script>
   <style>
     html { scroll-behavior: smooth; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1066,6 +1074,87 @@
     drawerClose.addEventListener('click', closeDrawer);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeDrawer();
+    });
+
+    // ── Analytics: Track All Clicks ──
+    // Anchor nav clicks
+    document.querySelectorAll('.hero-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        gtag('event', 'nav_click', {
+          section: link.textContent.trim()
+        });
+      });
+    });
+
+    // "More Info" drawer buttons
+    document.querySelectorAll('[data-drawer]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.drawer;
+        const d = drawerData[key];
+        gtag('event', 'more_info_click', {
+          path_key: key,
+          path_name: d ? d.title : key
+        });
+      });
+    });
+
+    // "View Demo" links on cards (onboarding + pre-open sections)
+    document.querySelectorAll('.card-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const card = link.closest('.card-body') || link.closest('.card');
+        const title = card ? (card.querySelector('.card-title') || {}).textContent || '' : '';
+        gtag('event', 'view_demo_click', {
+          demo_url: link.href,
+          card_title: title.trim()
+        });
+      });
+    });
+
+    // "View Demo Site" button inside drawer
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('drawer-view-demo')) {
+        gtag('event', 'drawer_view_demo_click', {
+          demo_url: e.target.href,
+          path_name: drawerTitle.textContent
+        });
+      }
+    });
+
+    // Client site card clicks
+    document.querySelectorAll('#clients .card').forEach(card => {
+      card.addEventListener('click', () => {
+        const title = (card.querySelector('.card-title') || {}).textContent || '';
+        const section = card.closest('.card-section');
+        const vertical = section ? (section.querySelector('h3') || {}).textContent || '' : '';
+        gtag('event', 'client_site_click', {
+          site_url: card.href,
+          site_name: title.trim(),
+          vertical: vertical.trim()
+        });
+      });
+    });
+
+    // Template card clicks
+    document.querySelectorAll('#templates .card').forEach(card => {
+      card.addEventListener('click', () => {
+        const title = (card.querySelector('.card-title') || {}).textContent || '';
+        gtag('event', 'template_click', {
+          template_url: card.href,
+          template_name: title.trim()
+        });
+      });
+    });
+
+    // Thumbnail image clicks (onboarding + pre-open)
+    document.querySelectorAll('.card-image-wrap > a').forEach(link => {
+      link.addEventListener('click', () => {
+        const card = link.closest('.onboarding-card, .preopen-card');
+        const title = card ? (card.querySelector('.card-title') || {}).textContent || '' : '';
+        gtag('event', 'thumbnail_click', {
+          demo_url: link.href,
+          card_title: title.trim()
+        });
+      });
     });
   </script>
 </body>
