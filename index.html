@@ -512,6 +512,38 @@
       .hero { padding: 40px 16px 32px; }
       .drawer { width: 100vw; }
     }
+
+    /* ── Back to Top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 90;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .back-to-top:hover {
+      background: #333;
+    }
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+    }
   </style>
 </head>
 <body>
@@ -527,13 +559,13 @@
   <div class="hero">
     <div class="hero-content">
       <div class="hero-eyebrow">Internal &middot; Sales + Onboarding</div>
-      <h1 class="hero-title">Find the right demo for every <span class="highlight">type</span> of gym we onboard.</h1>
+      <h1 class="hero-title"><span class="highlight">Explore websites</span> built for gyms, studios, and training centers like yours.</h1>
       <p class="hero-subtitle">Browse templates, onboarding paths, pre-open kits, and live client builds to see what your site could look like.</p>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><strong>2</strong> templates</div>
       <div class="hero-stat"><strong>6</strong> onboarding paths</div>
-      <div class="hero-stat"><strong>12</strong> live client sites</div>
+      <div class="hero-stat"><strong>13</strong> live client sites</div>
       <div class="hero-stat"><strong>3</strong> multi-location</div>
     </div>
   </div>
@@ -726,8 +758,8 @@
     <!-- ════════════════════════════════════ -->
     <div class="section-header section-divider" id="clients">
       <div class="section-label">04 &middot; Client Sites</div>
-      <h1>Client Sites <span class="section-count">15 sites</span></h1>
-      <p>Real websites built on Grow, organized by fitness vertical</p>
+      <h1>Client Sites <span class="section-count">16 sites</span></h1>
+      <p>Real websites built on Grow</p>
     </div>
 
     <!-- Multi-Location -->
@@ -880,7 +912,27 @@
       </a>
     </div>
 
+    <!-- Personal Training -->
+    <div class="sub-header"><h2>Personal Training</h2></div>
+    <div class="card-grid">
+      <a class="card" href="https://www.thestrengthlabgym.com/" target="_blank" rel="noopener">
+        <div class="card-image-wrap"><img class="card-image" src="images/strength_lab.png" alt="The Strength Lab" /></div>
+        <div class="card-body">
+          <div class="card-title">The Strength Lab</div>
+          <div class="card-desc">Personal training gym delivering individualized coaching and strength-focused programming.</div>
+          <div class="card-links"><span class="card-link">Visit Site</span></div>
+        </div>
+      </a>
+    </div>
+
   </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
 
   <!-- ════════════════════════════════════ -->
   <!-- Side Drawer -->
@@ -1113,6 +1165,15 @@
     drawerClose.addEventListener('click', closeDrawer);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeDrawer();
+    });
+
+    // ── Back to Top ──
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // ── Analytics: Track All Clicks ──
