@@ -583,6 +583,7 @@
     <!-- ════════════════════════════════════ -->
     <!-- Template Options -->
     <!-- ════════════════════════════════════ -->
+    <div data-section="templates">
     <div class="section-header" id="templates">
       <div class="section-label">01 &middot; Templates</div>
       <h1>Template Options <span class="section-count">2 sites</span></h1>
@@ -612,9 +613,12 @@
       </a>
     </div>
 
+    </div><!-- /templates -->
+
     <!-- ════════════════════════════════════ -->
     <!-- Onboarding Method (6 paths) -->
     <!-- ════════════════════════════════════ -->
+    <div data-section="onboarding">
     <div class="section-header" id="onboarding">
       <div class="section-label">02 &middot; Onboarding Paths</div>
       <h1>Onboarding Method <span class="section-count">6 paths</span></h1>
@@ -715,9 +719,12 @@
       </div>
     </div>
 
+    </div><!-- /onboarding -->
+
     <!-- ════════════════════════════════════ -->
     <!-- Pre-Open Launch Kit -->
     <!-- ════════════════════════════════════ -->
+    <div data-section="pre-open">
     <div class="section-header section-divider" id="preopen">
       <div class="section-label">03 &middot; Pre-Open Kit</div>
       <h1>Pre-Open Launch Kit <span class="section-count">2 pages</span></h1>
@@ -754,8 +761,11 @@
     </div>
 
     <!-- ════════════════════════════════════ -->
+    </div><!-- /pre-open -->
+
     <!-- Client Sites — By Vertical -->
     <!-- ════════════════════════════════════ -->
+    <div data-section="clients">
     <div class="section-header section-divider" id="clients">
       <div class="section-label">04 &middot; Client Sites</div>
       <h1>Client Sites <span class="section-count">16 sites</span></h1>
@@ -925,6 +935,7 @@
       </a>
     </div>
 
+  </div><!-- /clients -->
   </div>
 
   <!-- Back to Top -->
@@ -1186,13 +1197,10 @@
       });
     });
 
-    // Helper: detect which section an element belongs to
+    // Helper: find section from data-section wrapper
     function getSection(el) {
-      if (el.closest('#templates')) return 'templates';
-      if (el.closest('#onboarding')) return 'onboarding';
-      if (el.closest('#preopen')) return 'pre-open';
-      if (el.closest('#clients')) return 'clients';
-      return 'unknown';
+      const wrapper = el.closest('[data-section]');
+      return wrapper ? wrapper.dataset.section : 'unknown';
     }
 
     // "More Info" drawer buttons
@@ -1221,7 +1229,7 @@
       });
     });
 
-    // "View Demo Site" button inside drawer — uses last opened drawer's section
+    // "View Demo Site" button inside drawer
     let lastDrawerSection = '';
     document.querySelectorAll('[data-drawer]').forEach(btn => {
       btn.addEventListener('click', () => { lastDrawerSection = getSection(btn); });
@@ -1237,23 +1245,23 @@
     });
 
     // Client site card clicks
-    document.querySelectorAll('#clients .card').forEach(card => {
+    document.querySelectorAll('[data-section="clients"] .card').forEach(card => {
       card.addEventListener('click', () => {
         const title = (card.querySelector('.card-title') || {}).textContent || '';
-        const sub = card.closest('.card-grid');
-        const subHeader = sub ? sub.previousElementSibling : null;
-        const vertical = subHeader ? (subHeader.querySelector('h2') || {}).textContent || '' : '';
+        const grid = card.closest('.card-grid');
+        const subHeader = grid ? grid.previousElementSibling : null;
+        const vertical = (subHeader && subHeader.querySelector('h2')) ? subHeader.querySelector('h2').textContent.trim() : '';
         gtag('event', 'client_site_click', {
           section: 'clients',
           site_url: card.href,
           site_name: title.trim(),
-          vertical: vertical.trim()
+          vertical: vertical
         });
       });
     });
 
     // Template card clicks
-    document.querySelectorAll('#templates .card').forEach(card => {
+    document.querySelectorAll('[data-section="templates"] .card').forEach(card => {
       card.addEventListener('click', () => {
         const title = (card.querySelector('.card-title') || {}).textContent || '';
         gtag('event', 'template_click', {
@@ -1267,7 +1275,7 @@
     // Thumbnail image clicks (onboarding + pre-open)
     document.querySelectorAll('.card-image-wrap > a').forEach(link => {
       link.addEventListener('click', () => {
-        const card = link.closest('.onboarding-card, .preopen-card') || link.closest('.card');
+        const card = link.closest('.card') || link.closest('[data-drawer]');
         const title = card ? (card.querySelector('.card-title') || {}).textContent || '' : '';
         gtag('event', 'thumbnail_click', {
           section: getSection(link),
