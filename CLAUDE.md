@@ -16,6 +16,11 @@
   - `template_click` — template cards
   - `thumbnail_click` — thumbnail image clicks
 
+## Version
+- Current version: `v1.0.0`
+- Displayed in the top bar (`.top-bar-version`)
+- **Bump the version every time a commit is pushed to main** — use semver (patch for small fixes, minor for new sites/features)
+
 ## Preferences
 - **NEVER commit or push unless the user explicitly says to** — commits cost credits on Netlify, so only commit when directly asked
 - Always merge PRs to main when committing to a branch
