@@ -558,7 +558,7 @@
     <span class="top-bar-brand">PushPress</span>
     <span class="top-bar-sep">/</span>
     <span class="top-bar-page">Demo Site Launcher</span>
-    <span class="top-bar-version">v1.0.1</span>
+    <span class="top-bar-version">v1.1.0</span>
   </div>
 
   <!-- ── Hero ── -->
@@ -570,7 +570,7 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><strong>2</strong> templates</div>
-      <div class="hero-stat"><strong>6</strong> onboarding paths</div>
+      <div class="hero-stat"><strong>7</strong> onboarding paths</div>
       <div class="hero-stat"><strong>13</strong> live client sites</div>
       <div class="hero-stat"><strong>3</strong> multi-location</div>
     </div>
@@ -622,12 +622,12 @@
     </div><!-- /templates -->
 
     <!-- ════════════════════════════════════ -->
-    <!-- Onboarding Method (6 paths) -->
+    <!-- Onboarding Method (7 paths) -->
     <!-- ════════════════════════════════════ -->
     <div data-section="onboarding">
     <div class="section-header" id="onboarding">
       <div class="section-label">02 &middot; Onboarding Paths</div>
-      <h1>Onboarding Method <span class="section-count">6 paths</span></h1>
+      <h1>Onboarding Method <span class="section-count">7 paths</span></h1>
       <p>Each path defines the prospect's journey from first website visit to in-gym visit. Pick the one that matches how your gym sells.</p>
     </div>
 
@@ -696,15 +696,30 @@
 
       <!-- Path 5 -->
       <div class="card">
+        <a href="https://free-trial-class-core-high-touch.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-core-self-book.png" alt="Free Trial Class — High Touch" /></div>
+        </a>
+        <div class="card-body">
+          <div class="card-title">Free Trial Class <span class="card-chip">High Touch</span></div>
+          <div class="card-desc">GHL captures the lead and a coach reaches out personally to pick the right class and book it in Core. No booking link sent automatically. Best for gyms that close best on a conversation.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://free-trial-class-core-high-touch.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path5">Who is this for?</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Path 7 -->
+      <div class="card">
         <a href="https://free-trial-class-core-self-book.webflow.io/" target="_blank" rel="noopener">
           <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-core-self-book.png" alt="Free Trial Class — Core Self Book" /></div>
         </a>
         <div class="card-body">
           <div class="card-title">Free Trial Class <span class="card-chip">Core Self Book</span></div>
-          <div class="card-desc">GHL captures the lead, then sends a Core landing page link to book. Trial leads go into Core's check-in and attendance system from day one.</div>
+          <div class="card-desc">Every "Try a Free Class" button opens the Core landing page in a new tab. No form first. Prospects create their account and book a class in one place.</div>
           <div class="card-links">
             <a class="card-link" href="https://free-trial-class-core-self-book.webflow.io/" target="_blank" rel="noopener">View Demo</a>
-            <button class="card-link-info" data-drawer="path5">Who is this for?</button>
+            <button class="card-link-info" data-drawer="path7">Who is this for?</button>
           </div>
         </div>
       </div>
@@ -1039,21 +1054,34 @@
         ],
       },
       path5: {
+        title: 'Free Trial Class — High Touch',
+        url: 'https://free-trial-class-core-high-touch.webflow.io/',
+        rows: [
+          ['Gym Type', 'Group fitness gyms where the owner or a coach wants to talk to every trial lead before they show up. CrossFit, strength gyms, and martial arts schools where fit and experience level matter for the first class.'],
+          ['Sales Style', 'High touch. The prospect fills out a short form, then staff calls or texts them, finds the right class for their schedule and experience, and books them in.'],
+          ['Ideal When', "The gym's close rate is highest after a real conversation, or the class schedule needs a human to steer beginners to the right session. Staff needs the capacity to follow up quickly, ideally the same day."],
+          ['Tech', 'GHL Lead Capture Form on the website. GHL alerts staff to the new lead. Staff books the trial class in Core, so the prospect is in Core check-in and attendance from the first visit. No booking link is sent automatically.'],
+        ],
+        flow: ['CTA', 'Enter Info (GHL Form)', 'Staff Outreach', 'Staff Books Class in Core', 'First Visit'],
+        ctas: ['Try a Free Class', 'Claim Your Free Class', 'Talk to a Coach'],
+        nurtures: [
+          ['Nurture to Class', 'Automated SMS + email keeps the lead warm while staff reaches out to book a class, then sends reminders and what to expect once they\'re scheduled.'],
+          ['Abandonment Nurture', 'If staff can\'t reach the lead, an automated sequence keeps following up and asks them to reply with a good time to talk.'],
+          ['No-Show Nurture', 'If a lead is booked but doesn\'t show, a re-engagement sequence fires to get them into another class.'],
+          ['Post-Class Followup', 'After the trial class, automated followup encourages membership signup — how it went, next class options, and a membership offer.'],
+        ],
+      },
+      path7: {
         title: 'Free Trial Class — Core Self Book',
         url: 'https://free-trial-class-core-self-book.webflow.io/',
         rows: [
-          ['Gym Type', "Group fitness gyms that want trial leads managed through Core from the start. After filling out a GHL form, the prospect receives a link to the Core landing page to browse and book classes."],
-          ['Sales Style', 'Self-service. Fully automated. GHL captures the lead, then sends the Core LP link via SMS and email.'],
-          ['Ideal When', "The gym already runs everything through Core and doesn't want to maintain a separate GHL class calendar. The trade-off: Core requires account creation, which adds more steps."],
-          ['Tech', 'GHL Lead Capture Form on website. GHL automation sends SMS + email with Core class booking LP link.'],
+          ['Gym Type', 'Group fitness gyms that run everything through Core and want prospects booking straight into it. CrossFit, HIIT, yoga, Pilates, and other class-based gyms.'],
+          ['Sales Style', 'Self-service. Every "Try a Free Class" button on the site opens the Core landing page in a new tab. No form or staff outreach in between.'],
+          ['Ideal When', "The gym wants trial members in Core's check-in and attendance from the first click, with fewer handoffs than the GHL form version. The trade-off: Core account creation is the first step, so some prospects will drop off before booking."],
+          ['Tech', 'Website CTAs link directly to the Core free trial plan landing page. No GHL form or calendar on the website.'],
         ],
-        flow: ['CTA', 'Enter Info (GHL Form)', 'Receive Core LP Link', 'Book on Core LP', 'First Visit'],
+        flow: ['CTA', 'Core LP (New Tab)', 'Create Account', 'Book Class', 'First Visit'],
         ctas: ['Try a Free Class', 'Book Your Free Trial', 'Get Started Free'],
-        nurtures: [
-          ['Nurture to Class', 'Automated SMS + email after form submission — delivers the Core booking link and follows up with reminders leading up to class day.'],
-          ['Abandonment Nurture', 'If a lead fills out the GHL form but doesn\'t complete booking on Core, an automated sequence re-sends the link and encourages action.'],
-          ['Post-Class Followup', 'After the trial class, automated followup encourages membership signup — how it went, next class options, and a membership offer.'],
-        ],
       },
       path6: {
         title: 'Paid Trial',

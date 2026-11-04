@@ -17,7 +17,7 @@
   - `thumbnail_click` — thumbnail image clicks
 
 ## Version
-- Current version: `v1.0.0`
+- Current version: `v1.1.0`
 - Displayed in the top bar (`.top-bar-version`)
 - **Bump the version every time a commit is pushed to main** — use semver (patch for small fixes, minor for new sites/features)
 
