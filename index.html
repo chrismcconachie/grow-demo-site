@@ -301,6 +301,46 @@
       white-space: nowrap;
     }
 
+    /* Status starburst on card corners (New / Updated / Old) */
+    .card.has-status {
+      position: relative;
+      overflow: visible;
+    }
+    .card.has-status .card-image-wrap {
+      border-radius: 12px 12px 0 0;
+      overflow: hidden;
+    }
+    .card-status {
+      position: absolute;
+      top: -16px;
+      right: -14px;
+      z-index: 2;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: #111;
+      transform: rotate(12deg);
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+      pointer-events: none;
+    }
+    .card-status::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: var(--burst);
+      clip-path: polygon(50.0% 0.0%, 59.1% 10.0%, 71.7% 5.0%, 75.6% 17.9%, 89.1% 18.8%, 86.9% 32.2%, 98.7% 38.9%, 91.0% 50.0%, 98.7% 61.1%, 86.9% 67.8%, 89.1% 81.2%, 75.6% 82.1%, 71.7% 95.0%, 59.1% 90.0%, 50.0% 100.0%, 40.9% 90.0%, 28.3% 95.0%, 24.4% 82.1%, 10.9% 81.2%, 13.1% 67.8%, 1.3% 61.1%, 9.0% 50.0%, 1.3% 38.9%, 13.1% 32.2%, 10.9% 18.8%, 24.4% 17.9%, 28.3% 5.0%, 40.9% 10.0%);
+    }
+    .card-status-new { --burst: #39ff14; }
+    .card-status-updated { --burst: #ff2bd6; }
+    .card-status-old { --burst: #f4ff3a; }
+
     /* Card links row */
     .card-links {
       display: flex;
@@ -511,6 +551,7 @@
     }
     @media (max-width: 600px) {
       .card-grid, .card-grid.two-col { grid-template-columns: 1fr; }
+      .card-status { right: -6px; }
       .page { padding: 0 16px 60px; }
       .section-header h1 { font-size: 28px; }
       .section-nav { gap: 20px; flex-wrap: wrap; }
@@ -558,7 +599,7 @@
     <span class="top-bar-brand">PushPress</span>
     <span class="top-bar-sep">/</span>
     <span class="top-bar-page">Demo Site Launcher</span>
-    <span class="top-bar-version">v1.1.0</span>
+    <span class="top-bar-version">v1.2.0</span>
   </div>
 
   <!-- ── Hero ── -->
@@ -570,7 +611,7 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><strong>2</strong> templates</div>
-      <div class="hero-stat"><strong>7</strong> onboarding paths</div>
+      <div class="hero-stat"><strong>8</strong> onboarding paths</div>
       <div class="hero-stat"><strong>13</strong> live client sites</div>
       <div class="hero-stat"><strong>3</strong> multi-location</div>
     </div>
@@ -622,12 +663,12 @@
     </div><!-- /templates -->
 
     <!-- ════════════════════════════════════ -->
-    <!-- Onboarding Method (7 paths) -->
+    <!-- Onboarding Method (8 paths) -->
     <!-- ════════════════════════════════════ -->
     <div data-section="onboarding">
     <div class="section-header" id="onboarding">
       <div class="section-label">02 &middot; Onboarding Paths</div>
-      <h1>Onboarding Method <span class="section-count">7 paths</span></h1>
+      <h1>Onboarding Method <span class="section-count">8 paths</span></h1>
       <p>Each path defines the prospect's journey from first website visit to in-gym visit. Pick the one that matches how your gym sells.</p>
     </div>
 
@@ -680,7 +721,8 @@
 
     <div class="card-grid">
       <!-- Path 4 -->
-      <div class="card">
+      <div class="card has-status">
+        <span class="card-status card-status-old">Old</span>
         <a href="https://free-trial-class-ghl-self-book.webflow.io/" target="_blank" rel="noopener">
           <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-ghl-self-book.png" alt="Free Trial Class — GHL Self Book" /></div>
         </a>
@@ -695,7 +737,8 @@
       </div>
 
       <!-- Path 5 -->
-      <div class="card">
+      <div class="card has-status">
+        <span class="card-status card-status-updated">Updated</span>
         <a href="https://free-trial-class-core-high-touch.webflow.io/" target="_blank" rel="noopener">
           <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-core-self-book.png" alt="Free Trial Class — High Touch" /></div>
         </a>
@@ -709,10 +752,29 @@
         </div>
       </div>
 
+      <!-- Path 6 -->
+      <div class="card has-status">
+        <span class="card-status card-status-old">Old</span>
+        <a href="https://old-paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-paid-trial.png" alt="Paid Trial" /></div>
+        </a>
+        <div class="card-body">
+          <div class="card-title">Paid Trial <span class="card-chip">Core + Payment</span></div>
+          <div class="card-desc">A low-commitment offer like $7 for 7 days. GHL captures the lead, then sends a Core landing page link to complete payment. Only serious prospects walk in.</div>
+          <div class="card-links">
+            <a class="card-link" href="https://old-paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">View Demo</a>
+            <button class="card-link-info" data-drawer="path6">Who is this for?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid">
       <!-- Path 7 -->
-      <div class="card">
+      <div class="card has-status">
+        <span class="card-status card-status-new">New</span>
         <a href="https://free-trial-class-core-self-book.webflow.io/" target="_blank" rel="noopener">
-          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-core-self-book.png" alt="Free Trial Class — Core Self Book" /></div>
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-free-trial-ghl-self-book.png" alt="Free Trial Class — Core Self Book" /></div>
         </a>
         <div class="card-body">
           <div class="card-title">Free Trial Class <span class="card-chip">Core Self Book</span></div>
@@ -724,17 +786,18 @@
         </div>
       </div>
 
-      <!-- Path 6 -->
-      <div class="card">
+      <!-- Path 8 -->
+      <div class="card has-status">
+        <span class="card-status card-status-new">New</span>
         <a href="https://paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">
-          <div class="card-image-wrap"><img class="card-image" src="images/demo-paid-trial.png" alt="Paid Trial" /></div>
+          <div class="card-image-wrap"><img class="card-image" src="images/demo-paid-trial-new.png" alt="Paid Trial" /></div>
         </a>
         <div class="card-body">
           <div class="card-title">Paid Trial <span class="card-chip">Core + Payment</span></div>
-          <div class="card-desc">A low-commitment offer like $7 for 7 days. GHL captures the lead, then sends a Core landing page link to complete payment. Only serious prospects walk in.</div>
+          <div class="card-desc">A low-commitment offer like $7 for 7 days. The "7 Days for $7" button opens the Core landing page in a new tab, where prospects pay and sign up. No form first.</div>
           <div class="card-links">
             <a class="card-link" href="https://paid-trial-discounted-access.webflow.io/" target="_blank" rel="noopener">View Demo</a>
-            <button class="card-link-info" data-drawer="path6">Who is this for?</button>
+            <button class="card-link-info" data-drawer="path8">Who is this for?</button>
           </div>
         </div>
       </div>
@@ -1084,8 +1147,8 @@
         ctas: ['Try a Free Class', 'Book Your Free Trial', 'Get Started Free'],
       },
       path6: {
-        title: 'Paid Trial',
-        url: 'https://paid-trial-discounted-access.webflow.io/',
+        title: 'Paid Trial (Previous Version)',
+        url: 'https://old-paid-trial-discounted-access.webflow.io/',
         rows: [
           ['Gym Type', 'Gyms that want to qualify leads with a small financial commitment upfront. Common in CrossFit, strength gyms, and studios in competitive markets where free trials attract tire-kickers.'],
           ['Sales Style', 'Hybrid. Initial capture is self-service (form), but trial purchase happens on a separate Core landing page.'],
@@ -1099,6 +1162,18 @@
           ['Abandonment Nurture', 'If a lead fills out the GHL form but doesn\'t complete payment on Core, an automated sequence re-sends the link and reinforces the offer value.'],
           ['Post-Trial Followup', 'As the trial period winds down, automated followup encourages full membership conversion — trial recap, results check-in, and a membership offer.'],
         ],
+      },
+      path8: {
+        title: 'Paid Trial',
+        url: 'https://paid-trial-discounted-access.webflow.io/',
+        rows: [
+          ['Gym Type', 'Gyms that want to qualify leads with a small financial commitment upfront. Common in CrossFit, strength gyms, and studios in competitive markets where free trials attract tire-kickers.'],
+          ['Sales Style', 'Self-service. Every "7 Days for $7" button on the site opens the Core landing page in a new tab, where the prospect pays and creates their account. No form or staff outreach in between.'],
+          ['Ideal When', 'The gym wants to filter out low-intent leads and get paying trial members into Core from the first click. A small payment ($7 for 7 days, $29 for 2 weeks) signals real interest and reduces no-shows.'],
+          ['Tech', 'Website CTAs link directly to the Core trial plan landing page. No GHL form on the website.'],
+        ],
+        flow: ['CTA', 'Core LP (New Tab)', 'Complete Payment', 'Create Account', 'First Visit'],
+        ctas: ['7 Days for $7', '2 Weeks for $29', 'Get Full Access for $19'],
       },
 
       // ── Pre-Open Launch Kit ──
